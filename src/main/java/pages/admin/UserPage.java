@@ -75,7 +75,7 @@ public class UserPage extends BaseConfig{
 			Use.Click(roleSelectButton);
 			//Use.SendKeys(roleSelectInput, role);
 			Thread.sleep(1000);
-			roleSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(@id,'"+role+"')]")));
+			roleSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+role+"')]")));
 			Use.Click(roleSelectLi);
 		}
 		Use.SendKeys(emailInput, email);
@@ -100,7 +100,7 @@ public class UserPage extends BaseConfig{
 		if(!role.equals("")) {			
 			Use.Click(roleSelectButton);
 			Use.SendKeys(roleSelectInput, role);
-			roleSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(@id,'"+role+"')]")));
+			roleSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+role+"')]")));
 			Use.Click(roleSelectLi);
 		}
 		Use.SendKeys(emailInput, email);
@@ -119,7 +119,7 @@ public class UserPage extends BaseConfig{
 		if(!role.equals("")) {			
 			Use.Click(roleSelectButton);
 			Thread.sleep(1000);
-			roleSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(@id,'"+role+"')]")));
+			roleSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+role+"')]")));
 			Use.Click(roleSelectLi);
 		}
 		Use.SendKeys(emailInput, email);
@@ -141,7 +141,7 @@ public class UserPage extends BaseConfig{
 		if(!role.equals("")) {			
 			Use.Click(roleSelectButton);
 			Use.SendKeys(roleSelectInput, role);
-			roleSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(@id,'"+role+"')]")));
+			roleSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+role+"')]")));
 			Use.Click(roleSelectLi);
 		}
 		Use.SendKeys(emailInput, email);

@@ -10,7 +10,7 @@
 	    	</class>
         </classes>
     </test>
-    <test name="Role Management">
+    <test name="Role Management Setting">
         <classes>
             <class name="testCases.RoleManagement">
     			<methods>
@@ -20,7 +20,7 @@
 	    	</class>
         </classes>
     </test>
-    <test name="User Management">
+    <test name="User Management Setting">
         <classes>
             <class name="testCases.UserAdmin">
     			<methods>
@@ -30,7 +30,7 @@
 	    	</class>
         </classes>
     </test>
-    <test name="Category Product">
+    <test name="Category Product Setting">
         <classes>
             <class name="testCases.CategoryProduct">
     			<methods>
@@ -40,7 +40,7 @@
 	    	</class>
         </classes>
     </test>
-    <test name="Task Category">
+    <test name="Task Category Setting">
         <classes>
             <class name="testCases.TaskCategory">
     			<methods>
@@ -50,12 +50,22 @@
 	    	</class>
         </classes>
     </test>
-    <test name="Lead Label">
+    <test name="Lead Label Setting">
         <classes>
             <class name="testCases.LeadLabel">
     			<methods>
 					<include name="testAddLeadLabel"/>
 					<include name="testEditLeadLabel"/>
+    			</methods>
+	    	</class>
+        </classes>
+    </test>
+    <test name="Product Setting">
+        <classes>
+            <class name="testCases.Product">
+    			<methods>
+					<include name="testAddProduct"/>
+					<include name="testEditProduct"/>
     			</methods>
 	    	</class>
         </classes>

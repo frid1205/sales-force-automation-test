@@ -6,8 +6,9 @@ import java.sql.SQLException;
 import bases.BaseConfig;
 
 public class DB extends BaseConfig{
-	public static final String DELETE_LEADLABEL = "delete from card_labels cl where created_by in (select id from users u where u.company_id = (select id from companies c where name like '%Automation%'))";
-	public static final String DELETE_TASKCATEGORY = "select * from schedule_tasks st where company_id in (select id from companies c where c.name = 'PT Automation Test Technology')";
+	public static final String DELETE_PRODUCT = "DELETE FROM products p WHERE company_id in (SELECT id FROM companies c WHERE c.name LIKE '%Automation%')";
+	public static final String DELETE_LEADLABEL = "DELETE FROM card_labels cl WHERE created_by in (SELECT id FROM users u WHERE u.company_id = (SELECT id FROM companies c WHERE name LIKE '%Automation%'))";
+	public static final String DELETE_TASKCATEGORY = "SELECT * FROM schedule_tasks st WHERE company_id in (SELECT id FROM companies c WHERE c.name = 'PT Automation Test Technology')";
 	public static final String DELETE_CATEGORY_PRODUCT = "DELETE FROM product_categories pc  WHERE company_id IN (SELECT id FROM companies WHERE name = 'PT Automation Test Technology')";
 	public static final String DELETE_ROLES_HAS_PERMISION = "DELETE FROM role_has_permissions rhp WHERE role_id IN (SELECT id FROM roles r WHERE company_id = (SELECT id FROM companies c WHERE name LIKE '%Automation%'))";
     public static final String DELETE_ROLES = "DELETE FROM roles WHERE company_id IN (SELECT id FROM companies WHERE name = 'PT Automation Test Technology')";
@@ -15,6 +16,7 @@ public class DB extends BaseConfig{
     public static final String DELETE_COMPANY = "DELETE FROM companies WHERE name = 'PT Automation Test Technology'";
     
     public static final String[] ALL_QUERIES = {
+    		DELETE_PRODUCT,
     		DELETE_LEADLABEL,
     		DELETE_TASKCATEGORY,
     		DELETE_CATEGORY_PRODUCT,

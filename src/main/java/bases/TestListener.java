@@ -36,7 +36,6 @@ public class TestListener extends BaseConfig implements ISuiteListener, ITestLis
 
     @Override
     public void onTestStart(ITestResult result) {
-    	System.out.println("Start Test - GO");
     	//info for extent report
     	Object[] parameters = result.getParameters(); 
     	StringBuilder sb = new StringBuilder();
