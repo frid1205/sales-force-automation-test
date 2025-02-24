@@ -50,4 +50,14 @@
 	    	</class>
         </classes>
     </test>
+    <test name="Lead Label">
+        <classes>
+            <class name="testCases.LeadLabel">
+    			<methods>
+					<include name="testAddLeadLabel"/>
+					<include name="testEditLeadLabel"/>
+    			</methods>
+	    	</class>
+        </classes>
+    </test>
 </suite>
