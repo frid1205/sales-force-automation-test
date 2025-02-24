@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Admin Company" parallel="false" thread-count="1" verbose="1">
+    <test name="Login Admin Company">
+        <classes>
+            <class name="testCases.Login">
+    			<methods>
+					<include name="loginAdminCompany"/>
+    			</methods>
+	    	</class>
+        </classes>
+    </test>
+    <test name="Role Management">
+        <classes>
+            <class name="testCases.RoleManagement">
+    			<methods>
+					<include name="testAddRoleManagement"/>
+					<include name="testEditRoleManagement"/>
+    			</methods>
+	    	</class>
+        </classes>
+    </test>
+    <test name="User Management">
+        <classes>
+            <class name="testCases.UserAdmin">
+    			<methods>
+					<include name="testAddUserAdmin"/>
+					<include name="testEditUserAdmin"/>
+    			</methods>
+	    	</class>
+        </classes>
+    </test>
+    <test name="Category Product">
+        <classes>
+            <class name="testCases.CategoryProduct">
+    			<methods>
+					<include name="testAddCategory"/>
+					<include name="testEditCategory"/>
+    			</methods>
+	    	</class>
+        </classes>
+    </test>
+</suite>

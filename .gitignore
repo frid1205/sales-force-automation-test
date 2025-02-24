@@ -1,0 +1,6 @@
+/screenshot/
+/recordings*/
+/target/*
+/test-output/*
+/target/
+index.html

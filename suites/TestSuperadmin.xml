@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Company Configuration" parallel="false" thread-count="1" verbose="1">
+    <test name="Preparation Config">
+        <classes>
+            <class name="testCases.PreparationConfig">
+    			<methods>
+					<include name="executeQuery"/>
+    			</methods>
+	    	</class>
+        </classes>
+    </test>
+    <test name="Login Superadmin">
+        <classes>
+            <class name="testCases.Login">
+    			<methods>
+					<include name="loginSuperadmin"/>
+    			</methods>
+	    	</class>
+        </classes>
+    </test>
+    <test name="Company">
+	     <classes>
+	     	<class name="testCases.Company">
+    			<methods>
+					<include name="testAddCompany"/>
+					<include name="testEditCompany"/>
+    			</methods>
+	    	</class>
+	    </classes>
+  	</test>
+    <test name="User Company">
+	     <classes>
+	     	<class name="testCases.UserCompany">
+    			<methods>
+					<include name="testAddUserCompany"/>
+					<include name="testEditUserCompany"/>
+    			</methods>
+	    	</class>
+	    </classes>
+  	</test>
+</suite>
