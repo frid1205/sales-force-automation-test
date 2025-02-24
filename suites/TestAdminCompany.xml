@@ -40,4 +40,14 @@
 	    	</class>
         </classes>
     </test>
+    <test name="Task Category">
+        <classes>
+            <class name="testCases.TaskCategory">
+    			<methods>
+					<include name="testAddTaskCategory"/>
+					<include name="testEditTaskCategory"/>
+    			</methods>
+	    	</class>
+        </classes>
+    </test>
 </suite>

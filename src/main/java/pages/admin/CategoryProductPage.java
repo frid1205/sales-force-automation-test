@@ -58,6 +58,7 @@ public class CategoryProductPage extends BaseConfig{
 	public void editCategoryProduct(String categoryProductName, String expectedResult) throws InterruptedException {
 		Use.SendKeys(searchCategoryInput, categoryProductName);
 		Thread.sleep(2000);
+		editCategoryProductButton = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("(//a[contains(@data-url,'category-product/edit')]/i)[1][ancestor::tr/td[contains(text(),'"+categoryProductName+"')]]"))));
 		Use.Click(editCategoryProductButton);
 		Use.SendKeys(categoryNameInput, categoryProductName);
 		Use.Click(saveButton);
