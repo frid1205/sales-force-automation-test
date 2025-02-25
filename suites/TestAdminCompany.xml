@@ -70,4 +70,24 @@
 	    	</class>
         </classes>
     </test>
+    <test name="Customer Setting">
+        <classes>
+            <class name="testCases.Customer">
+    			<methods>
+					<include name="testAddCustomer"/>
+					<include name="testEditCustomer"/>
+    			</methods>
+	    	</class>
+        </classes>
+    </test>
+    <test name="Outlet Setting">
+        <classes>
+            <class name="testCases.Outlet">
+    			<methods>
+					<include name="testAddOutlet"/>
+					
+    			</methods>
+	    	</class>
+        </classes>
+    </test>
 </suite>
