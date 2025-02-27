@@ -1,14 +1,9 @@
 package utilization;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
-import org.apache.commons.io.FileUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -20,8 +15,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
 
 import bases.BaseConfig;
-import ru.yandex.qatools.ashot.comparison.ImageDiff;
-import ru.yandex.qatools.ashot.comparison.ImageDiffer;
 
 public class Utilize extends BaseConfig{
 	private static XSSFWorkbook wb;
@@ -119,37 +112,6 @@ public class Utilize extends BaseConfig{
 		return data;
 	}
 	
-	public static boolean compareImages(String file1, String file2) throws IOException {
-	   	  File expectedImageFile = new File(file1);
-	   	  File actualImageFile = new File(file2);
-	
-	   	  BufferedImage expectedImage = ImageIO.read(expectedImageFile);  
-	   	  BufferedImage actualImage = ImageIO.read(actualImageFile);
-	
-	   	  ImageDiffer imgDiff = new ImageDiffer();
-	
-	   	  ImageDiff diff = imgDiff.makeDiff(expectedImage, actualImage);
-	
-	   	  if (diff.hasDiff()) {
-	   		  return false;
-	   	  } else {
-	   		  return true;
-	   	  }
-	 }
-	 
-	 public static boolean verifyImage(String img) throws IOException {
-		 try {
-			FileUtils.copyFile(Utilize.getscreenshot(), new File("actualResult/screenshot/"+img+".jpg"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-        
-        String file1 = Utilize.getAbsolutePath("\\actualResult\\screenshot\\"+img+".jpg");
-        String file2 = Utilize.getAbsolutePath("\\expectedResult\\screenshot\\"+getBrowser()+"\\"+img+".jpg");
-        
-        return compareImages(file1, file2);
-	 }
-	 
 	public static XSSFWorkbook workBook() {
 		return wb;
 	}

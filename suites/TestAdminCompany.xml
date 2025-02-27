@@ -90,4 +90,14 @@
 	    	</class>
         </classes>
     </test>
+    <test name="Call Scheduller">
+        <classes>
+            <class name="testCases.CallScheduller">
+    			<methods>
+					<include name="testAddCallScheduller"/>
+					
+    			</methods>
+	    	</class>
+        </classes>
+    </test>
 </suite>

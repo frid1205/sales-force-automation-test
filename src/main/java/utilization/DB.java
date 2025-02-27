@@ -6,6 +6,10 @@ import java.sql.SQLException;
 import bases.BaseConfig;
 
 public class DB extends BaseConfig{
+	
+	public static final String DELETE_NOTIFICATION = "delete from notifications n where user_id in (select id from users where company_id in (select id from companies c where c.name like '%Automation%'))";
+	public static final String DELETE_SCHEDULETASK = "DELETE FROM schedule_tasks st WHERE company_id in (SELECT id FROM companies c WHERE c.name like '%Automation%')";
+	public static final String DELETE_SCHEDULE = "DELETE FROM schedules s WHERE user_id in (SELECT id FROM users WHERE company_id in (SELECT id FROM companies c WHERE c.name like '%Automation%'))";
 	public static final String DELETE_OUTLET = "DELETE FROM outlets o WHERE company_id in (SELECT id FROM companies c WHERE c.name LIKE '%Automation%')";
 	public static final String DELETE_CUSTOMER = "DELETE FROM customers c WHERE company_id in (SELECT id FROM companies c WHERE c.name LIKE '%Automation%')";
 	public static final String DELETE_PRODUCT = "DELETE FROM products p WHERE company_id in (SELECT id FROM companies c WHERE c.name LIKE '%Automation%')";
@@ -18,14 +22,10 @@ public class DB extends BaseConfig{
     public static final String DELETE_COMPANY = "DELETE FROM companies WHERE name = 'PT Automation Test Technology'";
     
     public static final String[] ALL_QUERIES = {
-    		DELETE_OUTLET,
-    		DELETE_CUSTOMER,
-    		DELETE_PRODUCT,
-    		DELETE_LEADLABEL,
-    		DELETE_TASKCATEGORY,
-    		DELETE_CATEGORY_PRODUCT,
-    		DELETE_ROLES_HAS_PERMISION,
-    		DELETE_ROLES,
+    		DELETE_NOTIFICATION, DELETE_SCHEDULETASK, DELETE_SCHEDULE,
+    		DELETE_OUTLET, DELETE_CUSTOMER,
+    		DELETE_PRODUCT, DELETE_LEADLABEL, DELETE_TASKCATEGORY, DELETE_CATEGORY_PRODUCT,
+    		DELETE_ROLES_HAS_PERMISION, DELETE_ROLES,
     		DELETE_USERS,
     		DELETE_COMPANY
     }; 

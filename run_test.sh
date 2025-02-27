@@ -1,0 +1,1 @@
+mvn test -e -X -f "$PWD/pom.xml"
