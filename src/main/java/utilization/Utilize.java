@@ -24,9 +24,14 @@ public class Utilize extends BaseConfig{
 	//public static String file1, file2;
 	
 	public static String getAbsolutePath(String relativePath) {
+		String osName = System.getProperty("os.name").toLowerCase();
         String projectRoot = System.getProperty("user.dir");
         
-        Path path = Paths.get(projectRoot, relativePath);
+        if (osName.contains("nix") || osName.contains("nux") || osName.contains("mac")) {
+        	relativePath = relativePath.replaceAll("\\\\", "/");
+        }
+        
+        Path path = Paths.get(projectRoot, relativePath).normalize();
 
         return path.toAbsolutePath().toString();
     }
