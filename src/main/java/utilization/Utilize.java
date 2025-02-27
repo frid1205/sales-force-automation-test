@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -23,8 +26,9 @@ public class Utilize extends BaseConfig{
 	public static String getAbsolutePath(String relativePath) {
         String projectRoot = System.getProperty("user.dir");
         
-        File file = new File(projectRoot, relativePath);
-        return file.getAbsolutePath();
+        Path path = Paths.get(projectRoot, relativePath);
+
+        return path.toAbsolutePath().toString();
     }
 	
 	public static String getPathFile(String fileName) {

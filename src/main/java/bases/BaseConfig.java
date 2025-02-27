@@ -32,6 +32,7 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import jakarta.mail.MessagingException;
 import utilization.DB;
 
 @Listeners(bases.TestListener.class)
@@ -209,10 +210,18 @@ public class BaseConfig {
 	}
 	
 	@AfterSuite
-	@Parameters({"record"})
-	public void stopRecording(String record) throws Exception {
+	@Parameters({"record","email"})
+	public void stopRecording(String record, String email) throws Exception {
 		if(record.equals("yes")) {
 			Recording.stopRecording();
 		}
+		
+		if(email.equals("yes")) {
+    		try {
+    			EmailSender.SentEmail();
+    		} catch (MessagingException | IOException e) {
+    			e.printStackTrace();
+    		}
+    	}
 	}
 }
