@@ -11,6 +11,17 @@ RUN echo "Dockerfile Test on Apache2" > /var/www/html/index.html
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install necessary packages and dependencies
+RUN apt update && \
+    apt install -y \
+    libgbm-dev \
+    libxshmfence1 \
+    libxrandr2 \
+    libxi6 \
+    libxcursor1 \
+    libxcomposite1 \
+    libasound2
+
+# Install necessary packages and dependencies
 RUN apt-get update && \
     apt-get install -y \
         wget \
