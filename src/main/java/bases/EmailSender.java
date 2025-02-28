@@ -28,7 +28,7 @@ public class EmailSender extends BaseConfig{
 		Message message = new MimeMessage(getEmailSession());
 		message.setFrom(new InternetAddress(EMAIL_FROM));
 		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(String.join(",", recipients)));
-		message.setSubject("Email subject");
+		message.setSubject("Automation Test Result (Sales Tracking Force)");
         MimeBodyPart textPart = new MimeBodyPart();
         textPart.setText("Here is the result of sales force of automation test, for more detail please contact QA engineer");
 
