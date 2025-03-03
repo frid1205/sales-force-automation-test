@@ -3,8 +3,10 @@ variables:
 
 stages:
   - deployment
+  - run-test
 
-test-automation:
+### DEPLOYMENT ############################################################
+deployment:
   stage: deployment
   image: docker:stable
   services:
@@ -22,6 +24,18 @@ test-automation:
   tags:
     - biznet-lumos-dev
 
-
-
+### RUN TEST ############################################################
+run-test:
+  stage: run-test
+  image: docker:stable
+  services:
+    - docker:dind
+  script:
+    - docker exec sales-force-automation-test /bin/bash -c "./run_test.sh"
+  only:
+    - master
+    - ci
+  tags:
+    - biznet-lumos-dev
+  when: manual  
     
