@@ -95,6 +95,9 @@ public class BaseConfig {
         ChromeOptions options = new ChromeOptions();
         if (headless.equals("true")) {
             options.addArguments("--headless");
+			options.addArguments("--no-sandbox");
+        	options.addArguments("--disable-dev-shm-usage");
+        	options.addArguments("--disable-gpu");
         }
         driver = new ChromeDriver(options);
     }
