@@ -4,7 +4,7 @@
 	<parameter name="browser" value="chrome" />
     <parameter name="headless" value="true" />
     <parameter name="record" value="no" />
-    <parameter name="email" value="no" />
+    <parameter name="email" value="yes" />
   	<suite-files>	
 		<suite-file path="../suites/TestSuperadmin.xml"/>
 		<suite-file path="../suites/TestAdminCompany.xml"/>
