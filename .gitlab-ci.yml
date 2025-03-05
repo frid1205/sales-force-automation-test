@@ -23,6 +23,7 @@ deployment:
     - ci
   tags:
     - biznet-lumos-dev
+  when: manual   
 
 ### RUN TEST ############################################################
 run-test:
