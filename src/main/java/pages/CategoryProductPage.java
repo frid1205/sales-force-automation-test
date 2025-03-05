@@ -1,4 +1,4 @@
-package pages.admin;
+package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -57,7 +57,7 @@ public class CategoryProductPage extends BaseConfig{
 	
 	public void editCategoryProduct(String categoryProductName, String expectedResult) throws InterruptedException {
 		Use.SendKeys(searchCategoryInput, categoryProductName);
-		Thread.sleep(2000);
+		Thread.sleep(2500);
 		editCategoryProductButton = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("(//a[contains(@data-url,'category-product/edit')]/i)[1][ancestor::tr/td[contains(text(),'"+categoryProductName+"')]]"))));
 		Use.Click(editCategoryProductButton);
 		Use.SendKeys(categoryNameInput, categoryProductName);

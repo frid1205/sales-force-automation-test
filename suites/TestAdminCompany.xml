@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Admin Company" parallel="false" thread-count="1" verbose="1">
+	<parameter name="env" value="cms" />
     <test name="Login Admin Company">
         <classes>
             <class name="testCases.Login">
@@ -96,6 +97,16 @@
     			<methods>
 					<include name="testAddCallScheduller"/>
 					
+    			</methods>
+	    	</class>
+        </classes>
+    </test>
+    <test name="Lead Management">
+        <classes>
+            <class name="testCases.LeadManagement">
+    			<methods>
+					<include name="testAddLeadManagement"/>
+					<include name="testEditAndCommentLeadManagement"/>
     			</methods>
 	    	</class>
         </classes>

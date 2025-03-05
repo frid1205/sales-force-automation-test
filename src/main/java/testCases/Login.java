@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import bases.BaseConfig;
-import pages.admin.LoginAdminPage;
+import pages.LoginAdminPage;
 import utilization.Utilize;
 
 public class Login extends BaseConfig{

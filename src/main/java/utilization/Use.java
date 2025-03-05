@@ -3,9 +3,7 @@ package utilization;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,7 +13,7 @@ import org.testng.Assert;
 import bases.BaseConfig;
 
 public class Use extends BaseConfig {
-	private static int maxAttempt = 10;
+	private static int maxAttempt = 3;
 	
 	public static void SendKeys(WebElement element, String keysToSend) throws InterruptedException {
 		scrollIntoView(getWait().until(ExpectedConditions.visibilityOf(element)));
@@ -26,7 +24,7 @@ public class Use extends BaseConfig {
 				element.clear();
 			}
 		}catch(Exception e) {
-			//System.out.println("Value already empty");
+			System.out.println("Value already empty : "+e);
 		}
 		
 		if(!keysToSend.isEmpty()) {
@@ -56,7 +54,7 @@ public class Use extends BaseConfig {
 					element.sendKeys(keysToSend);
 					break;
 				}
-				catch(ElementNotVisibleException ex) {
+				catch(ElementNotInteractableException ex) {
 					System.out.println("waitClickableThenClick StaleElementReferenceException");
 					if (attempt == maxAttempt) {
 						Assert.assertEquals(true, false, "Element cannot be found");
@@ -93,7 +91,7 @@ public class Use extends BaseConfig {
 			scrollIntoView(element);
 		}catch(ElementClickInterceptedException e) {
 			scrollIntoView(getWait().until(ExpectedConditions.elementToBeClickable(element)));
-		}catch(ElementNotVisibleException e) {
+		}catch(ElementNotInteractableException e) {
 			scrollIntoView(getWait().until(ExpectedConditions.visibilityOf(element)));
 		}
 		

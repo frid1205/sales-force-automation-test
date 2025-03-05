@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import bases.BaseConfig;
-import pages.admin.ProductPage;
+import pages.ProductPage;
 import utilization.Utilize;
 
 public class Product extends BaseConfig{

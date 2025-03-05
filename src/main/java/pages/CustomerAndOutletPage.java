@@ -1,4 +1,4 @@
-package pages.admin;
+package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -96,7 +96,7 @@ public class CustomerAndOutletPage extends BaseConfig{
 			Use.Click(regionSelectButton);
 			Thread.sleep(1000);
 			Use.SendKeys(selectInput, region);
-			Thread.sleep(1500);
+			Thread.sleep(2000);
 			regionSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+region+"')]")));
 			Use.Click(regionSelectLi);
 		}
@@ -106,6 +106,9 @@ public class CustomerAndOutletPage extends BaseConfig{
 	}
 	
 	public void editCustomer(String customerName, String province, String region, String expectedResult) throws InterruptedException {
+		if(customerName.equals("Suka Makmur")) {
+			System.out.println("masuk");
+		}
 		Use.SendKeys(searchInput, customerName);
 		Thread.sleep(2000);
 		listOutletButton = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("(//a[contains(@data-url,'setting/customer/edit')]/i)[1][ancestor::tr/td[contains(text(),'"+customerName+"')]]"))));
@@ -162,7 +165,7 @@ public class CustomerAndOutletPage extends BaseConfig{
 		//open map
 		Use.Click(setPointButton);
 		Use.SendKeys(searchLocationInput, location);
-		Thread.sleep(1000);
+		Thread.sleep(1500);
 		searchLocationInput.sendKeys(Keys.ENTER);
 		Use.Click(submitMapButton);
 		
@@ -206,7 +209,7 @@ public class CustomerAndOutletPage extends BaseConfig{
 		//open map
 		Use.Click(setPointButton);
 		Use.SendKeys(searchLocationInput, location);
-		Thread.sleep(1000);
+		Thread.sleep(1500);
 		searchLocationInput.sendKeys(Keys.ENTER);
 		Use.Click(submitMapButton);
 		

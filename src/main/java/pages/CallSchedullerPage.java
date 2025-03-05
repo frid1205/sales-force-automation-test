@@ -1,4 +1,4 @@
-package pages.admin;
+package pages;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

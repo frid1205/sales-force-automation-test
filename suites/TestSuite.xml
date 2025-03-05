@@ -3,10 +3,11 @@
 <suite name="Automation of Sales Tracking Force" parallel="tests" thread-count="1" verbose="1">
 	<parameter name="browser" value="chrome" />
     <parameter name="headless" value="false" />
-    <parameter name="record" value="no" />
-    <parameter name="email" value="yes" />
+    <parameter name="record" value="yes" />
+    <parameter name="email" value="no" />
   	<suite-files>	
 		<suite-file path="../suites/TestSuperadmin.xml"/>
 		<suite-file path="../suites/TestAdminCompany.xml"/>
+		<!--<suite-file path="../suites/TestSalesMobile.xml"/>-->
 	</suite-files>
 </suite>

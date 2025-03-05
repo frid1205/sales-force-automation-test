@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import bases.BaseConfig;
-import pages.admin.CustomerAndOutletPage;
+import pages.CustomerAndOutletPage;
 import utilization.Utilize;
 
 public class Outlet extends BaseConfig{
