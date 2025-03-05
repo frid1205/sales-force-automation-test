@@ -4,3 +4,6 @@
 /test-output/*
 /target/
 index.html
+.classpath
+.project
+/.settings/
