@@ -39,6 +39,7 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import jakarta.mail.MessagingException;
 import utilization.DB;
+import utilization.Utilize;
 
 @Listeners(bases.TestListener.class)
 public class BaseConfig {
@@ -141,10 +142,10 @@ public class BaseConfig {
 	            .setPlatformName("Android") 
 	            .setDeviceName("milo") 
 	            .setUdid("emulator-5554") 
-	            .setAppPackage("com.lumoshive.salestrackpro")
-	            .setAppActivity("com.lumoshive.salestrackpro.MainActivity") 
+	            //.setAppPackage("com.lumoshive.salestrackpro")
+	            //.setAppActivity("com.lumoshive.salestrackpro.MainActivity") 
 	            .setIgnoreHiddenApiPolicyError(true)
-	            //.setApp(appPath) // Path ke file APK
+	            .setApp(Utilize.getAbsolutePath("\\testdata\\STP.apk")) // Path ke file APK
 	            .setAutomationName("UiAutomator2")
 	            .setNoReset(false) 
 	            .setFullReset(false); 
@@ -152,28 +153,32 @@ public class BaseConfig {
 		 try {
             // Inisialisasi AndroidDriver dengan UiAutomator2Options
             mdriver = new AndroidDriver(new URL("http://127.0.0.1:4723"), options);
+            wait = new WebDriverWait(driver, Duration.ofMillis(DEFAULT_TIMEOUT));
             String packageName = "com.lumoshive.salestrackpro";
 
             // Berikan izin lokasi secara otomatis
             mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.ACCESS_FINE_LOCATION"));
             mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.ACCESS_COARSE_LOCATION"));
             mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.ACCESS_BACKGROUND_LOCATION"));
+            
+            // Grant camera permission
+            mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.CAMERA"));
 
+            // Grant notification permission (Android 13+)
+            mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.POST_NOTIFICATIONS"));
             System.out.println("Izin lokasi diberikan!");
 
             // **Langkah tambahan**: Buka Pengaturan untuk memastikan lokasi "All the Time" aktif
             mdriver.executeScript("mobile: shell", ImmutableMap.of(
                 "command", "am start -a android.settings.APPLICATION_DETAILS_SETTINGS -d package:" + packageName
             ));
-         
-            System.out.println("Izin lokasi 'Allow all the time' berhasil diberikan!");
             
-            Thread.sleep(5000);		            
+            Thread.sleep(2000);	
+            
             // Kembali ke aplikasi utama
             mdriver.executeScript("mobile: shell", ImmutableMap.of(
                 "command", "am start -n com.lumoshive.salestrackpro/com.lumoshive.salestrackpro.MainActivity"
             ));
-
 
             // Atur lokasi GPS (Latitude, Longitude, Altitude)
             Location location = new Location(-6.164896991271068, 106.76346571069685, 1.0); 
@@ -183,8 +188,6 @@ public class BaseConfig {
             
             // Tunggu sebentar agar perubahan lokasi terlihat di UI
             try { Thread.sleep(10000); } catch (InterruptedException e) { e.printStackTrace(); }
-
-            //driver.quit();
             System.out.println("berhasil di jalankan");
 		 } catch (MalformedURLException e) {
             e.printStackTrace();

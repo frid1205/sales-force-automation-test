@@ -50,7 +50,7 @@ public class Use extends BaseConfig {
 			int attempt = 0;
 			while(attempt < maxAttempt) {
 				try {
-					scrollIntoView(element);
+					
 					element.sendKeys(keysToSend);
 					break;
 				}
@@ -88,11 +88,11 @@ public class Use extends BaseConfig {
 	
 	public static void Click(WebElement element) throws InterruptedException {
 		try {
-			scrollIntoView(element);
-		}catch(ElementClickInterceptedException e) {
 			scrollIntoView(getWait().until(ExpectedConditions.elementToBeClickable(element)));
-		}catch(ElementNotInteractableException e) {
+		}catch(ElementClickInterceptedException e) {
 			scrollIntoView(getWait().until(ExpectedConditions.visibilityOf(element)));
+		}catch(ElementNotInteractableException e) {
+			scrollIntoView(element);
 		}
 		
 		int attempt = 1;
