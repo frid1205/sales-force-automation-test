@@ -171,6 +171,7 @@ public class CustomerAndOutletPage extends BaseConfig{
 		
 		Use.SendKeys(PICInput, PIC);
 		Use.SendKeys(phoneNumberInput, phoneNumber);
+		Thread.sleep(1000);
 		Use.Click(saveButton);
 		outletAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//*[contains(text(),'"+expectedResult+"')]"))));
 		Assert.assertEquals(outletAlert.getText(), expectedResult);

@@ -113,13 +113,13 @@ public class LeadManagementPage extends BaseConfig{
 		Use.Click(addActionButton);
 		if(!assignTo.equals("")) {
 			Use.Click(assignToSelectButton);
-			Thread.sleep(1000);
+			Thread.sleep(1500);
 			assignToSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+assignTo+"')]")));
 			Use.Click(assignToSelectLi);
 		}
 		if(!label.equals("")) {
 			Use.Click(labelSelectButton);
-			Thread.sleep(1000);
+			Thread.sleep(1500);
 			labelSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+label+"')]")));
 			Use.Click(labelSelectLi);
 		}
@@ -128,25 +128,25 @@ public class LeadManagementPage extends BaseConfig{
 		Thread.sleep(2000);
 		if(!status.equals("")) {
 			Use.Click(statusSelectButton);
-			Thread.sleep(1000);
+			Thread.sleep(1500);
 			statusSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+status+"')]")));
 			Use.Click(statusSelectLi);
 		}
 		if(!customer.equals("")) {
 			Use.Click(customerSelectButton);
-			Thread.sleep(1000);
+			Thread.sleep(1500);
 			customerSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+customer+"')]")));
 			Use.Click(customerSelectLi);
 		}
 		if(!priority.equals("")) {
 			Use.Click(prioritySelectButton);
-			Thread.sleep(1000);
+			Thread.sleep(1500);
 			prioritySelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+priority+"')]")));
 			Use.Click(prioritySelectLi);
 		}
 		if(!progress.equals("")) {
 			Use.Click(progressSelectButton);
-			Thread.sleep(1000);
+			Thread.sleep(1500);
 			progressSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+progress+"')]")));
 			Use.Click(progressSelectLi);
 		}
@@ -156,7 +156,7 @@ public class LeadManagementPage extends BaseConfig{
 		Use.SendKeys(revenueInput, revenue);
 		if(!chanceOfWinning.equals("")) {
 			Use.Click(chanceOfWinningSelectButton);
-			Thread.sleep(1000);
+			Thread.sleep(1500);
 			chanceOfWinningSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+chanceOfWinning+"')]")));
 			Use.Click(chanceOfWinningSelectLi);
 		}
@@ -175,13 +175,13 @@ public class LeadManagementPage extends BaseConfig{
 			Use.Click(editCardButton);
 			if(!assignTo.equals("")) {
 				Use.Click(assignToSelectButton);
-				Thread.sleep(1000);
+				Thread.sleep(1500);
 				assignToSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+assignTo+"')]")));
 				Use.Click(assignToSelectLi);
 			}
 			if(!label.equals("")) {
 				Use.Click(labelSelectButton);
-				Thread.sleep(1000);
+				Thread.sleep(1500);
 				labelSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+label+"')]")));
 				Use.Click(labelSelectLi);
 			}
@@ -190,25 +190,25 @@ public class LeadManagementPage extends BaseConfig{
 			Thread.sleep(2000);
 			if(!status.equals("")) {
 				Use.Click(statusSelectButton);
-				Thread.sleep(1000);
+				Thread.sleep(1500);
 				statusSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+status+"')]")));
 				Use.Click(statusSelectLi);
 			}
 			if(!customer.equals("")) {
 				Use.Click(customerSelectButton);
-				Thread.sleep(1000);
+				Thread.sleep(1500);
 				customerSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+customer+"')]")));
 				Use.Click(customerSelectLi);
 			}
 			if(!priority.equals("")) {
 				Use.Click(prioritySelectButton);
-				Thread.sleep(1000);
+				Thread.sleep(1500);
 				prioritySelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+priority+"')]")));
 				Use.Click(prioritySelectLi);
 			}
 			if(!progress.equals("")) {
 				Use.Click(progressSelectButton);
-				Thread.sleep(1000);
+				Thread.sleep(1500);
 				progressSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+progress+"')]")));
 				Use.Click(progressSelectLi);
 			}
@@ -218,7 +218,7 @@ public class LeadManagementPage extends BaseConfig{
 			Use.SendKeys(revenueInput, revenue);
 			if(!chanceOfWinning.equals("")) {
 				Use.Click(chanceOfWinningSelectButton);
-				Thread.sleep(1000);
+				Thread.sleep(1500);
 				chanceOfWinningSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+chanceOfWinning+"')]")));
 				Use.Click(chanceOfWinningSelectLi);
 			}

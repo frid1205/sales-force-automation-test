@@ -9,12 +9,15 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 import utilization.Utilize;
 
-
 public class TestListener extends BaseConfig implements ISuiteListener, ITestListener {
+	String base64Image, errorMessage,cleanErrorMessage;
+	String[] splitMessage;
 	static {
 		File dir1 = new File(Utilize.getAbsolutePath("//actualResult//screenshot"));
 		
@@ -30,8 +33,18 @@ public class TestListener extends BaseConfig implements ISuiteListener, ITestLis
 
     @Override
     public void onStart(ITestContext context) {
-    	test = extent.createTest(context.getName());
-    	System.out.println("============ "+context.getName()+" ============");
+    	// Ubah nama report sesuai keinginan
+        String reportName = context.getSuite().getName(); // Ganti sesuai kebutuhan
+        String reportPath = "automationtestreport/" + reportName;
+
+        // Inisialisasi ExtentSparkReporter dengan nama yang diubah
+        ExtentSparkReporter reporter = new ExtentSparkReporter(reportPath+ ".html");
+        extent = new ExtentReports();
+        extent.attachReporter(reporter);
+
+        // Buat test berdasarkan nama TestNG suite/class
+        test = extent.createTest(context.getName());
+        System.out.println("============ " + context.getName() + " ============");
     }
 
     @Override
@@ -73,17 +86,22 @@ public class TestListener extends BaseConfig implements ISuiteListener, ITestLis
             }
             combinedErrorDetails = String.join(", ", errorDetails);
         }
-    	
-    	
-    	// Ambil pesan error utama dari Throwable
-        String errorMessage = result.getThrowable().getMessage();
 
-        // Potong pesan pada "For documentation on this error"
-        String[] splitMessage = errorMessage.split("For documentation on this error");
-        String cleanErrorMessage = splitMessage[0].trim();
+    	
+        try {
+        	errorMessage = result.getThrowable().getMessage();
+        	splitMessage = errorMessage.split("For documentation on this error");
+            cleanErrorMessage = splitMessage[0].trim();
+        }catch(Exception e) {
+        	System.out.println(e);
+        }
         
         try {
-            String base64Image = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BASE64);
+        	if(context.getSuite().getName().contains("Mobile")) {
+        		base64Image = ((TakesScreenshot) getMDriver()).getScreenshotAs(OutputType.BASE64);
+        	}else {
+        		base64Image = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BASE64);
+        	}
             
 	        test.fail(result.getMethod().getMethodName() +" : Test Failed, \n Cause : " + cleanErrorMessage + ", " + combinedErrorDetails
 	        		,MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());

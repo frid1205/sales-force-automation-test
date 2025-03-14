@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Admin Company" parallel="false" thread-count="1" verbose="1">
+<suite name="AdminCompany" parallel="false" thread-count="1" verbose="1">
 	<parameter name="env" value="cms" />
     <test name="Login Admin Company">
         <classes>
@@ -11,7 +11,7 @@
 	    	</class>
         </classes>
     </test>
-    <test name="Role Management Setting">
+    <!--<test name="Role Management Setting">
         <classes>
             <class name="testCases.RoleManagement">
     			<methods>
@@ -90,7 +90,7 @@
     			</methods>
 	    	</class>
         </classes>
-    </test>
+    </test>-->
     <test name="Call Scheduller">
         <classes>
             <class name="testCases.CallScheduller">
@@ -107,6 +107,7 @@
     			<methods>
 					<include name="testAddLeadManagement"/>
 					<include name="testEditAndCommentLeadManagement"/>
+					<include name="testAddCallSchedullerFromLead"/>
     			</methods>
 	    	</class>
         </classes>

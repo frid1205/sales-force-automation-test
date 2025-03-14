@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.time.Duration;
+import java.util.Map;
 import java.util.Properties;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -26,18 +27,15 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
-
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.google.common.collect.ImmutableMap;
-
 import io.appium.java_client.Location;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import jakarta.mail.MessagingException;
 import utilization.DB;
 import utilization.Utilize;
 
@@ -59,6 +57,7 @@ public class BaseConfig {
     private static final String CONFIG_FILE = "config.properties";
     private static String currentUrl;
     private static String targetUrl;
+    protected static Location location;
     
     public BaseConfig() {
 	    properties = new Properties();
@@ -155,40 +154,17 @@ public class BaseConfig {
             mdriver = new AndroidDriver(new URL("http://127.0.0.1:4723"), options);
             wait = new WebDriverWait(driver, Duration.ofMillis(DEFAULT_TIMEOUT));
             String packageName = "com.lumoshive.salestrackpro";
-
+            //clear cache and storage
+            mdriver.executeScript("mobile: shell", Map.of("command", "pm clear " + packageName));
             // Berikan izin lokasi secara otomatis
             mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.ACCESS_FINE_LOCATION"));
             mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.ACCESS_COARSE_LOCATION"));
             mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.ACCESS_BACKGROUND_LOCATION"));
-            
             // Grant camera permission
             mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.CAMERA"));
-
             // Grant notification permission (Android 13+)
             mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.POST_NOTIFICATIONS"));
-            System.out.println("Izin lokasi diberikan!");
 
-            // **Langkah tambahan**: Buka Pengaturan untuk memastikan lokasi "All the Time" aktif
-            mdriver.executeScript("mobile: shell", ImmutableMap.of(
-                "command", "am start -a android.settings.APPLICATION_DETAILS_SETTINGS -d package:" + packageName
-            ));
-            
-            Thread.sleep(2000);	
-            
-            // Kembali ke aplikasi utama
-            mdriver.executeScript("mobile: shell", ImmutableMap.of(
-                "command", "am start -n com.lumoshive.salestrackpro/com.lumoshive.salestrackpro.MainActivity"
-            ));
-
-            // Atur lokasi GPS (Latitude, Longitude, Altitude)
-            Location location = new Location(-6.164896991271068, 106.76346571069685, 1.0); 
-            mdriver.setLocation(location);
-
-            System.out.println("Lokasi berhasil diubah!");
-            
-            // Tunggu sebentar agar perubahan lokasi terlihat di UI
-            try { Thread.sleep(10000); } catch (InterruptedException e) { e.printStackTrace(); }
-            System.out.println("berhasil di jalankan");
 		 } catch (MalformedURLException e) {
             e.printStackTrace();
 		 }
@@ -289,18 +265,10 @@ public class BaseConfig {
 	}
 	
 	@AfterSuite
-	@Parameters({"record","email"})
-	public void stopRecording(String record, String email) throws Exception {
+	@Parameters({"record"})
+	public void stopRecording(String record) throws Exception {
 		if(record.equals("yes")) {
 			Recording.stopRecording();
 		}
-		
-		if(email.equals("yes")) {
-    		try {
-    			EmailSender.SentEmail();
-    		} catch (MessagingException | IOException e) {
-    			e.printStackTrace();
-    		}
-    	}
 	}
 }

@@ -5,11 +5,13 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import bases.BaseConfig;
+import pages.CallSchedullerPage;
 import pages.LeadManagementPage;
 import utilization.Utilize;
 
 public class LeadManagement extends BaseConfig{
 	LeadManagementPage LeadManagementPage;
+	CallSchedullerPage CallSchedullerPage;
 	String FilePath;
 	
 	public LeadManagement() {
@@ -19,6 +21,7 @@ public class LeadManagement extends BaseConfig{
 	@BeforeClass
 	public void setUpBeforeClass() {
 		LeadManagementPage = new LeadManagementPage();
+		CallSchedullerPage = new CallSchedullerPage();
 	}
 	
 	@DataProvider(name = "dataAddLeadManagement")
@@ -30,6 +33,12 @@ public class LeadManagement extends BaseConfig{
 	@DataProvider(name = "dataEditLeadManagement")
 	public Object[][] getEditLeadManagement() {
 		Object data[][] = Utilize.getDataFromExcel("\\testdata\\LeadManagement.xlsx","editLeadManagement");
+		return data;
+	}
+	
+	@DataProvider(name = "dataAddCallScheduller")
+	public Object[][] getAddCallScheduller() {
+		Object data[][] = Utilize.getDataFromExcel("\\testdata\\LeadManagement.xlsx","addCallScheduller");
 		return data;
 	}
 	
@@ -47,5 +56,12 @@ public class LeadManagement extends BaseConfig{
 	{
 		goToUrl("sales/leads-management");
 		LeadManagementPage.editLeadManagement(state, assignTo, label, startDate, endDate, customer, priority, progress, description,detail, revenue, chanceOfWinning, comment, expectedResult);
+	}
+	
+	@Test(dataProvider="dataAddCallScheduller")
+	public void testAddCallSchedullerFromLead(String assignTo, String startTime, String endTime, String customer, String outlet, String taskCategory, String description, String expectedResult) throws InterruptedException, IOException 
+	{
+		goToUrl("sales/leads-management");
+		CallSchedullerPage.addCallSchedullerFromLead(assignTo,startTime,endTime,customer,outlet,taskCategory,description,expectedResult);
 	}
 }
