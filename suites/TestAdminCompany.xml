@@ -11,7 +11,7 @@
 	    	</class>
         </classes>
     </test>
-    <!--<test name="Role Management Setting">
+    <test name="Role Management Setting">
         <classes>
             <class name="testCases.RoleManagement">
     			<methods>
@@ -90,7 +90,7 @@
     			</methods>
 	    	</class>
         </classes>
-    </test>-->
+    </test>
     <test name="Call Scheduller">
         <classes>
             <class name="testCases.CallScheduller">
