@@ -1,24 +1,23 @@
 #!/bin/bash
 
-echo "Membuka Emulator..."
+echo "Open Emulator..."
 emulator -avd Pixel_XL
 
-echo "Menunggu emulator siap..."
+echo "Wait for emulator ready..."
 adb wait-for-device
 
-echo "Menjalankan Appium di terminal baru..."
+echo "Runnning appium in new terminal window..."
 gnome-terminal -- bash -c "appium --use-plugins=execute-driver --relaxed-security; exec bash" &
 
-# Tunggu beberapa detik agar Appium siap
+# wait for appium ready
 sleep 10
 
-# Kembali ke direktori proyek sebelum menjalankan Maven
+# Back to project directory before running maven
 cd "$(dirname "$0")" || exit
 
-echo "Menjalankan Maven tests..."
+echo "Running tests..."
 mvn test -f pom.xml
 
-# Cek apakah perintah sebelumnya gagal
 if [ $? -ne 0 ]; then
     echo "Maven test failed with error level $?."
     exit 1
@@ -26,19 +25,19 @@ else
     echo "Maven test completed successfully."
 fi
 
-echo "Menutup Emulator..."
+echo "Close Emulator..."
 adb -s emulator-5554 emu kill
 sleep 5
 
-echo "Mematikan semua emulator..."
+echo "close all emulator..."
 pkill -f qemu-system-
 
-echo "Menutup Appium..."
+echo "Close Appium..."
 pkill -f node
 sleep 3
 
-echo "Menutup Semua Terminal..."
+echo "Close all Terminal..."
 pkill -f gnome-terminal
 
-echo "Selesai."
+echo "Done."
 exit 0
