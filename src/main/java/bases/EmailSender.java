@@ -40,8 +40,7 @@ public class EmailSender extends BaseConfig{
 	
 	public static void SentEmail() throws AddressException, MessagingException, IOException {
 		String[] recipients = {
-				"fendy.ridwan@lumoshive.com",
-	            "nurul.aini@lumoshive.com"
+				"fendy.ridwan@lumoshive.com"
 		};
 
         // Buat pesan email
@@ -56,9 +55,7 @@ public class EmailSender extends BaseConfig{
 
         // Daftar file attachment (tambah file sesuai kebutuhan)
         List<String> attachmentPaths = Arrays.asList(
-        	Utilize.getAbsolutePath("\\automationtestreport\\SuperadminCompanyConfig.html"),
-            Utilize.getAbsolutePath("\\automationtestreport\\AdminCompany.html"),
-            Utilize.getAbsolutePath("\\automationtestreport\\SalesInApplicationMobile.html")
+        	Utilize.getAbsolutePath("\\test-output\\AutomationTestResult.html")
         );
 
         // Multipart untuk menggabungkan text dan attachments

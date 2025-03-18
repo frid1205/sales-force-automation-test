@@ -36,6 +36,18 @@ public class LeadManagement extends BaseConfig{
 		return data;
 	}
 	
+	@DataProvider(name = "dataEditMoveCardToClose")
+	public Object[][] getdataEditMoveCardToClose() {
+		Object data[][] = Utilize.getDataFromExcel("\\testdata\\LeadManagement.xlsx","editMoveCardToClose");
+		return data;
+	}
+	
+	@DataProvider(name = "dataEditProgressCardBySales")
+	public Object[][] getdataEditProgressCardBySales() {
+		Object data[][] = Utilize.getDataFromExcel("\\testdata\\LeadManagement.xlsx","editProgressCardBySales");
+		return data;
+	}
+	
 	@DataProvider(name = "dataAddCallScheduller")
 	public Object[][] getAddCallScheduller() {
 		Object data[][] = Utilize.getDataFromExcel("\\testdata\\LeadManagement.xlsx","addCallScheduller");
@@ -52,6 +64,22 @@ public class LeadManagement extends BaseConfig{
 	
 	@Test(dataProvider="dataEditLeadManagement")
 	public void testEditAndCommentLeadManagement(String state, String assignTo, String label, String startDate, String endDate, String customer, String priority,
+			String progress, String description,String detail, String revenue, String chanceOfWinning,String comment,  String expectedResult) throws InterruptedException, IOException 
+	{
+		goToUrl("sales/leads-management");
+		LeadManagementPage.editLeadManagement(state, assignTo, label, startDate, endDate, customer, priority, progress, description,detail, revenue, chanceOfWinning, comment, expectedResult);
+	}
+	
+	@Test(dataProvider="dataEditMoveCardToClose")
+	public void testEditMoveCardToClose(String state, String assignTo, String label, String startDate, String endDate, String customer, String priority,
+			String progress, String description,String detail, String revenue, String chanceOfWinning,String comment,  String expectedResult) throws InterruptedException, IOException 
+	{
+		goToUrl("sales/leads-management");
+		LeadManagementPage.editLeadManagement(state, assignTo, label, startDate, endDate, customer, priority, progress, description,detail, revenue, chanceOfWinning, comment, expectedResult);
+	}
+	
+	@Test(dataProvider="dataEditProgressCardBySales")
+	public void testEditProgressCardBySales(String state, String assignTo, String label, String startDate, String endDate, String customer, String priority,
 			String progress, String description,String detail, String revenue, String chanceOfWinning,String comment,  String expectedResult) throws InterruptedException, IOException 
 	{
 		goToUrl("sales/leads-management");

@@ -1,5 +1,8 @@
 package pages;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -106,6 +109,7 @@ public class LeadManagementPage extends BaseConfig{
 	
 	WebElement leadManagementAlert;
 	WebElement leadManagementCommentAlert;
+	String[] dates;
 	
 	public void addLeadManagement(String status, String assignTo, String label, String startDate, String endDate, String customer, String priority,
 			String progress, String description,String detail, String revenue, String chanceOfWinning,  String expectedResult) throws InterruptedException {
@@ -123,8 +127,9 @@ public class LeadManagementPage extends BaseConfig{
 			labelSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+label+"')]")));
 			Use.Click(labelSelectLi);
 		}
-		Use.SendKeys(startDateInput, startDate);
-		Use.SendKeys(endDateInput, endDate);
+		dates = getStartAndEndOfCurrentMonth();
+		Use.SendKeys(startDateInput, dates[0]);
+		Use.SendKeys(endDateInput, dates[1]);
 		Thread.sleep(2000);
 		if(!status.equals("")) {
 			Use.Click(statusSelectButton);
@@ -237,4 +242,16 @@ public class LeadManagementPage extends BaseConfig{
 			Use.Click(cancelButton);//for closing form modal
 		}
 	}
+	
+	public static String[] getStartAndEndOfCurrentMonth() {
+        LocalDate today = LocalDate.now();
+        LocalDate startOfMonth = today.withDayOfMonth(1);
+        LocalDate endOfMonth = today.withDayOfMonth(today.lengthOfMonth());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String startDateFormatted = startOfMonth.format(formatter);
+        String endDateFormatted = endOfMonth.format(formatter);
+
+        return new String[]{startDateFormatted, endDateFormatted};
+    }
 }

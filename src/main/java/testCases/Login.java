@@ -39,6 +39,12 @@ public class Login extends BaseConfig{
 		return data;
 	}
 	
+	@DataProvider(name = "dataLoginSales")
+	public Object[][] getDataLoginSales() {
+		Object data[][] = Utilize.getDataFromExcel("\\testdata\\Login.xlsx","Sales");
+		return data;
+	}
+	
 	@Test(dataProvider="dataSuperadmin")
 	public void loginSuperadmin(String email, String password, String expectedCondition) throws InterruptedException, IOException
 	{
@@ -48,6 +54,13 @@ public class Login extends BaseConfig{
 	
 	@Test(dataProvider="dataAdminCompany")
 	public void loginAdminCompany(String email, String password, String expectedCondition) throws InterruptedException, IOException
+	{
+		goToUrl("login");
+		LoginAdminPage.testLogin(email, password, expectedCondition);
+	}
+	
+	@Test(dataProvider="dataLoginSales")
+	public void loginSales(String email, String password, String expectedCondition) throws InterruptedException, IOException
 	{
 		goToUrl("login");
 		LoginAdminPage.testLogin(email, password, expectedCondition);

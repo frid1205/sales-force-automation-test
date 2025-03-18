@@ -17,17 +17,17 @@ public class Use extends BaseConfig {
 	
 	public static void SendKeys(WebElement element, String keysToSend) throws InterruptedException {
 		scrollIntoView(getWait().until(ExpectedConditions.visibilityOf(element)));
-		try {
-			if(!element.getAttribute("value").isEmpty()) {
-				element.clear();
-			}else if(!element.getText().equals("")) {
-				element.clear();
-			}
-		}catch(Exception e) {
-			System.out.println("Value already empty : "+e);
-		}
 		
 		if(!keysToSend.isEmpty()) {
+			try {
+				if(!element.getAttribute("value").isEmpty()) {
+					element.clear();
+				}else if(!element.getText().equals("")) {
+					element.clear();
+				}
+			}catch(Exception e) {
+				System.out.println("Value already empty : "+e);
+			}
 			int attempt = 0;
 			while(attempt < maxAttempt) {
 				try {
