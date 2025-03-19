@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Admin Close Bucket and Approve/reject Expenses" parallel="false" thread-count="1" verbose="1">
+<suite name="Admin - Close Bucket and ApproveOrreject Expenses" parallel="false" thread-count="1" verbose="1">
 	<parameter name="env" value="cms" />
     <test name="Login Sales">
         <classes>
@@ -11,11 +11,20 @@
 	    	</class>
         </classes>
     </test>
-    <test name="Lead Management - Admin update status">
+    <!--<test name="Lead Management - Admin update status">
         <classes>
             <class name="testCases.LeadManagement">
     			<methods>
 					<include name="testEditMoveCardToClose"/>
+    			</methods>
+	    	</class>
+        </classes>
+    </test>-->
+    <test name="Expenses Management - Approve or Reject">
+        <classes>
+            <class name="testCases.ExpensesManagement">
+    			<methods>
+					<include name="testExpenseManagement"/>
     			</methods>
 	    	</class>
         </classes>

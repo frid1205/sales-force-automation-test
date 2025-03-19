@@ -40,7 +40,9 @@ public class EmailSender extends BaseConfig{
 	
 	public static void SentEmail() throws AddressException, MessagingException, IOException {
 		String[] recipients = {
-				"fendy.ridwan@lumoshive.com"
+				"fendy.ridwan@lumoshive.com",
+				"nurul.aini@lumoshive.com",
+				"Harianto@lumoshive.com"
 		};
 
         // Buat pesan email
