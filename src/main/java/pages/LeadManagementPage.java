@@ -248,7 +248,7 @@ public class LeadManagementPage extends BaseConfig{
         LocalDate startOfMonth = today.withDayOfMonth(1);
         LocalDate endOfMonth = today.withDayOfMonth(today.lengthOfMonth());
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         String startDateFormatted = startOfMonth.format(formatter);
         String endDateFormatted = endOfMonth.format(formatter);
 
