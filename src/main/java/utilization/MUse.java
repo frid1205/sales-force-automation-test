@@ -1,6 +1,6 @@
 package utilization;
 
-import org.openqa.selenium.By;
+import bases.BaseConfig;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,11 +10,11 @@ import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 import java.time.Duration;
 import java.util.Collections;
-import bases.BaseConfig;
 
 public class MUse extends BaseConfig {
 	private static int maxAttempt = 3;
 	
+	//with clicking the element prior
 	public static void sendKeys(WebElement element, String keysToSend) throws InterruptedException {
 		if(!keysToSend.isEmpty()) {
 			int attempt = 0;
@@ -31,10 +31,11 @@ public class MUse extends BaseConfig {
 				}
 				attempt++;
 			}
-			hideKeyboard();
+			//hideKeyboard();
 		}
 	}
 	
+	//without clicking the element prior
 	public static void sendKeys2(WebElement element, String keysToSend) throws InterruptedException {
 		if(!keysToSend.isEmpty()) {
 			int attempt = 0;
@@ -50,7 +51,7 @@ public class MUse extends BaseConfig {
 				}
 				attempt++;
 			}
-			hideKeyboard();
+			//hideKeyboard();
 		}
 	}
 	

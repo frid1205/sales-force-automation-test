@@ -37,7 +37,7 @@ public class RequestExpensesPage extends BaseConfig{
 	@FindBy (xpath="//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.widget.EditText[2]")
 	WebElement detailButton;
 	
-	@FindBy (xpath="//android.widget.ScrollView/android.widget.EditText[2]")
+	@FindBy (xpath="//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.widget.EditText[2]")
 	WebElement detailInput;
 	
 	@FindBy (xpath="//android.view.View[contains(@content-desc,'Select File')]")

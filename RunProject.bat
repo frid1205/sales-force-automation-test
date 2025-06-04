@@ -1,7 +1,7 @@
 @echo off
 echo Membuka Emulator...
-cd C:\Users\Fendy Ridwan\AppData\Local\Android\Sdk\emulator
-start emulator -avd Pixel_9_API_33_Tiramisu
+cd C:\AndroidSDK\emulator
+start emulator -avd testEmulator
 echo Menunggu emulator siap...
 adb wait-for-device
 
@@ -20,14 +20,14 @@ call mvn test -f pom.xml
 
 REM Cek apakah perintah sebelumnya gagal (error level lebih dari 0)
 if %errorlevel% neq 0 (
+    echo Menjalankan Maven tests...
     echo Maven test failed with error level %errorlevel%.
-    goto end
-) else (
+    ) else (
     echo Maven test completed successfully.
 )
 
 echo Menutup Emulator...
-"C:\Users\Fendy Ridwan\AppData\Local\Android\Sdk\platform-tools\adb.exe" -s emulator-5554 emu kill
+"C:\AndroidSDK\platform-tools\Sdk\platform-tools\adb.exe" -s emulator-5554 emu kill
 timeout /t 5
 
 echo Mematikan semua emulator...

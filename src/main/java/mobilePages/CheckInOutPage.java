@@ -139,6 +139,7 @@ public class CheckInOutPage extends BaseConfig{
         	             Thread.sleep(1000);
         	             quantityProductInput = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("//android.widget.EditText["+((2*i)+1)+"]"))));
         	             MUse.sendKeys(quantityProductInput, quantity);
+        	             MUse.swipeUp(470, 1200, 470, 660);
         	             Thread.sleep(1000);
         	             priceProductInput = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("//android.widget.EditText["+(2*(i+1))+"]"))));
         	             MUse.sendKeys(priceProductInput, price);
@@ -151,8 +152,9 @@ public class CheckInOutPage extends BaseConfig{
         	         MUse.click(checkOutPhotoButton);
         	         MUse.click(takeAPictureButton);
                  	 MUse.click(confirmTakeAPictureButton);
-                 	 MUse.hideKeyboard();
-                 	 MUse.swipeUp(430, 1286, 430, 768);
+                 	 //MUse.hideKeyboard();
+                 	 //MUse.swipeUp(430, 1286, 430, 768);
+                 	 Thread.sleep(1000);
                  	 //disable add attachment
         			 /*MUse.sendKeys(selectFileButton, Utilize.getAbsolutePath(attachmentCheckout));
         			 MUse.click(burgerMenuButton); MUse.click(downloadMenuButton);
@@ -170,7 +172,7 @@ public class CheckInOutPage extends BaseConfig{
                 }
                 break;
             }
-            MUse.swipeUp(435, 1750, 435, 1220);
+            MUse.swipeUp(435, 1461, 435, 1009);
             
             if (cardButtonList.isEmpty() && loop==3) {
             	//MUse.click(backButton);

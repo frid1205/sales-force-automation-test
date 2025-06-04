@@ -102,6 +102,7 @@ public class CompanyPage extends BaseConfig{
 		Use.SendKeys(companyPICNameInput, companyPICName);
 		Use.SendKeys(companyPICEmailInput, companyPICEmail);
 		Use.SendKeys(companyPICPasswordInput, companyPICPassword);
+		System.out.println("masuk mas "+mapType);
 		if(mapType.equals("googlemap")) {
 			Use.Click(googleMapCheckbox);
 			Use.Click(OKButton);

@@ -35,17 +35,17 @@ public class Outlet extends BaseConfig{
 	}
 	
 	@Test(dataProvider="dataAddOutlet")
-	public void testAddOutlet(String customerName, String outletName, String province, String region,String address, String location, String PIC, String phoneNumber, String expectedResult) throws InterruptedException, IOException 
+	public void testAddOutlet(String customerName, String outletName, String province, String region,String address, String longtitudeLatitude, String location, String PIC, String phoneNumber, String expectedResult) throws InterruptedException, IOException 
 	{
         goToUrl("setting/customer");
-        OutletPage.addOutletCustomer(customerName,outletName,province,region,address,location,PIC,phoneNumber,expectedResult);
+        OutletPage.addOutletCustomer(customerName,outletName,province,region,address, longtitudeLatitude, location,PIC,phoneNumber,expectedResult);
 	}
 	
 	
 	@Test(dataProvider="dataAddOutlet")
-	public void testEditOutlet(String customerName, String outletName, String province, String region,String address, String location, String PIC, String phoneNumber, String expectedResult) throws InterruptedException, IOException 
+	public void testEditOutlet(String customerName, String outletName, String province, String region,String address, String longtitudeLatitude, String location, String PIC, String phoneNumber, String expectedResult) throws InterruptedException, IOException 
 	{
 		goToUrl("setting/customer");
-		OutletPage.editOutletCustomer(customerName,outletName,province,region,address,location,PIC,phoneNumber,expectedResult);
+		OutletPage.editOutletCustomer(customerName,outletName,province,region,address, longtitudeLatitude, location,PIC,phoneNumber,expectedResult);
 	}
 }

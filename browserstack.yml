@@ -1,0 +1,21 @@
+userName: lumoshiveindones_TDMlAk
+accessKey: sUX73p6v6jzT3jC1X8Lp
+framework: testng
+app: bs://c4a3394348892a53d3b105aac5cfe697845d5c7a
+platforms:
+  - platformName: android
+    deviceName: Samsung Galaxy S22 Ultra
+    platformVersion: 12.0
+  - platformName: android
+    deviceName: Google Pixel 7 Pro
+    platformVersion: 13.0
+  - platformName: android
+    deviceName: OnePlus 9
+    platformVersion: 11.0
+browserstackLocal: true
+buildName: STP_Mobile_Test1
+projectName: STP_MobileAutomationTest
+CUSTOM_TAG_1: "You can set a custom Build Tag here"
+# Use CUSTOM_TAG_<N> and set more build tags as you need.
+debug: true
+networkLogs: true

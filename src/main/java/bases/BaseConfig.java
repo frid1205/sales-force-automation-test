@@ -9,8 +9,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -58,6 +61,8 @@ public class BaseConfig {
     private static String currentUrl;
     private static String targetUrl;
     protected static Location location;
+    public static String isCloud = "false";
+    static HashMap<String, Object> browserstackOptions = new HashMap<String, Object>();
     
     public BaseConfig() {
 	    properties = new Properties();
@@ -103,6 +108,7 @@ public class BaseConfig {
 	private static void setupChromeDriver(String headless) {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--guest");
         if (headless.equals("true")) {
             options.addArguments("--headless");
 			options.addArguments("--no-sandbox");
@@ -136,37 +142,82 @@ public class BaseConfig {
         wait = new WebDriverWait(driver, Duration.ofMillis(DEFAULT_TIMEOUT));
     }
 	
+	private static HashMap<String, Object> getBrowserstackOptions(){
+	    HashMap<String, Object> browserstackOptions = new HashMap<>();
+	    browserstackOptions.put("userName","lumoshiveindones_TDMlAk");
+	    browserstackOptions.put("accessKey","sUX73p6v6jzT3jC1X8Lp");
+	    browserstackOptions.put("deviceName", "Google Pixel 6");
+	    browserstackOptions.put("osVersion", "12.0");
+	    browserstackOptions.put("projectName", "STP Project");
+	    browserstackOptions.put("buildName", "Build 1.0");
+	    browserstackOptions.put("sessionName", "STP Session");
+	    browserstackOptions.put("appiumVersion", "2.4.1");
+	    return browserstackOptions;
+	}
+	
 	private static void configureMobileDriver() throws MalformedURLException, InterruptedException  {
-		 UiAutomator2Options options = new UiAutomator2Options()
-	            .setPlatformName("Android") 
-	            .setDeviceName("milo") 
-	            .setUdid("emulator-5554") 
-	            //.setAppPackage("com.lumoshive.salestrackpro")
-	            //.setAppActivity("com.lumoshive.salestrackpro.MainActivity") 
-	            .setIgnoreHiddenApiPolicyError(true)
-	            .setApp(Utilize.getAbsolutePath("\\testdata\\STP.apk")) // Path ke file APK
-	            .setAutomationName("UiAutomator2")
-	            .setNoReset(false) 
-	            .setFullReset(false); 
+		browserstackOptions = getBrowserstackOptions();
+		UiAutomator2Options options = new UiAutomator2Options();
+		if(isCloud.equals("true")) {
+			options.setPlatformName("Android")
+		       .setApp("bs://1ac4a8d59b8f434d8a7a6640f7ed90b79c7de607")
+		       .setAppPackage("com.lumoshive.salestrackpro")
+		       .setAppActivity("com.lumoshive.salestrackpro.MainActivity")
+		       .setAutomationName("UiAutomator2");
+			options.setCapability("bstack:options", getBrowserstackOptions());
+			
+		}else {
+			options.setPlatformName("Android") 
+				.setDeviceName("emulator-5554") 
+				.setUdid("emulator-5554") 
+				.setAppPackage("com.lumoshive.salestrackpro")
+				.setAppActivity("com.lumoshive.salestrackpro.MainActivity") 
+				.setIgnoreHiddenApiPolicyError(true)
+				.setApp(Utilize.getAbsolutePath("\\testdata\\STP.apk")) // Path ke file APK
+				.setAutomationName("UiAutomator2")
+				.setNoReset(false) 
+				.setFullReset(false); 
+		}
 
-		 try {
-            // Inisialisasi AndroidDriver dengan UiAutomator2Options
-            mdriver = new AndroidDriver(new URL("http://127.0.0.1:4723"), options);
-            wait = new WebDriverWait(driver, Duration.ofMillis(DEFAULT_TIMEOUT));
-            String packageName = "com.lumoshive.salestrackpro";
-            //clear cache and storage
-            mdriver.executeScript("mobile: shell", Map.of("command", "pm clear " + packageName));
-            // Berikan izin lokasi secara otomatis
-            mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.ACCESS_FINE_LOCATION"));
-            mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.ACCESS_COARSE_LOCATION"));
-            mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.ACCESS_BACKGROUND_LOCATION"));
-            // Grant camera permission
-            mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.CAMERA"));
-            // Grant notification permission (Android 13+)
-            mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.POST_NOTIFICATIONS"));
-
+		try {
+			// Inisialisasi AndroidDriver dengan UiAutomator2Options
+			if(isCloud.equals("true")) {
+			    String username = "lumoshiveindones_TDMlAk";
+			    String accessKey = "sUX73p6v6jzT3jC1X8Lp";
+			    String cloudUrl = "https://" + username + ":" + accessKey + "@hub-cloud.browserstack.com/wd/hub";
+			    mdriver = new AndroidDriver(new URL(cloudUrl), options);
+			} else {
+				mdriver = new AndroidDriver(new URL("http://127.0.0.1:4723"), options);
+			}
+			wait = new WebDriverWait(driver, Duration.ofMillis(DEFAULT_TIMEOUT));
+			
+			if(isCloud.equals("true")) {
+				options.setCapability("autoGrantPermissions", true);
+				
+				options.setCapability("appPermissions", Arrays.asList(
+					    "android.permission.ACCESS_FINE_LOCATION",
+					    "android.permission.ACCESS_COARSE_LOCATION",
+					    "android.permission.ACCESS_BACKGROUND_LOCATION",
+					    "android.permission.CAMERA",
+					    "android.permission.POST_NOTIFICATIONS"
+				));
+				
+			}else {
+				String packageName = "com.lumoshive.salestrackpro";
+				//clear cache and storage
+				mdriver.executeScript("mobile: shell", Map.of("command", "pm clear " + packageName));
+				// Berikan izin lokasi secara otomatis
+				mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.ACCESS_FINE_LOCATION"));
+				mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.ACCESS_COARSE_LOCATION"));
+				mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.ACCESS_BACKGROUND_LOCATION"));
+				// Grant camera permission
+				mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.CAMERA"));
+				// Grant notification permission
+				mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.POST_NOTIFICATIONS"));
+			}
+	
 		 } catch (MalformedURLException e) {
-            e.printStackTrace();
+	        e.printStackTrace();
 		 }
 	}
 	

@@ -1,5 +1,7 @@
 package pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -60,7 +62,7 @@ public class CustomerAndOutletPage extends BaseConfig{
 	@FindBy(xpath="//input[@name='outlet_name']")
     WebElement outletNameInput;
 	
-	@FindBy(xpath="//textarea[@name='address']")
+	@FindBy(xpath="//textarea[@id='address']")
 	WebElement addressInput;
 	
 	@FindBy(xpath="//span[@id='btnModal']")
@@ -68,6 +70,12 @@ public class CustomerAndOutletPage extends BaseConfig{
 	
 	@FindBy(xpath="//input[@id='pac-input']")
 	WebElement searchLocationInput;
+	
+	@FindBy(xpath="//input[@id='location_point']")
+	WebElement locationPointInput;
+	
+	@FindBy(xpath="//*[contains(@src,'openstreet')]")
+	List <WebElement> openStreetMap;
 	
 	@FindBy(xpath="//button[@id='btnSubmitMap']")
 	WebElement submitMapButton;
@@ -106,9 +114,6 @@ public class CustomerAndOutletPage extends BaseConfig{
 	}
 	
 	public void editCustomer(String customerName, String province, String region, String expectedResult) throws InterruptedException {
-		if(customerName.equals("Suka Makmur")) {
-			System.out.println("masuk");
-		}
 		Use.SendKeys(searchInput, customerName);
 		Thread.sleep(2000);
 		listOutletButton = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("(//a[contains(@data-url,'setting/customer/edit')]/i)[1][ancestor::tr/td[contains(text(),'"+customerName+"')]]"))));
@@ -136,7 +141,7 @@ public class CustomerAndOutletPage extends BaseConfig{
 		Assert.assertEquals(customerAlert.getText(), expectedResult);
 	}
 	
-	public void addOutletCustomer(String customerName, String outletName, String province, String region,String address, String location, String PIC, String phoneNumber, String expectedResult) throws InterruptedException {
+	public void addOutletCustomer(String customerName, String outletName, String province, String region,String address, String longtitudeLatitude, String location, String PIC, String phoneNumber, String expectedResult) throws InterruptedException {
 		Use.SendKeys(searchInput, customerName);
 		Thread.sleep(2500);
 		listOutletButton = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("(//a[contains(@href,'outlet')]/i)[ancestor::tr/td[contains(text(),'"+customerName+"')]]"))));
@@ -163,21 +168,25 @@ public class CustomerAndOutletPage extends BaseConfig{
 		Use.SendKeys(addressInput, address);
 		
 		//open map
-		Use.Click(setPointButton);
-		Use.SendKeys(searchLocationInput, location);
-		Thread.sleep(1500);
-		searchLocationInput.sendKeys(Keys.ENTER);
-		Use.Click(submitMapButton);
+		if(!openStreetMap.isEmpty()) { //if use openstreetmap
+			Use.SendKeys(locationPointInput, longtitudeLatitude);
+		}else {
+			Use.Click(setPointButton);
+			Use.SendKeys(searchLocationInput, location);
+			Thread.sleep(1500);
+			searchLocationInput.sendKeys(Keys.ENTER);
+			Use.Click(submitMapButton);
+		}
 		
 		Use.SendKeys(PICInput, PIC);
 		Use.SendKeys(phoneNumberInput, phoneNumber);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		Use.Click(saveButton);
 		outletAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//*[contains(text(),'"+expectedResult+"')]"))));
 		Assert.assertEquals(outletAlert.getText(), expectedResult);
 	}
 	
-	public void editOutletCustomer(String customerName, String outletName, String province, String region,String address, String location, String PIC, String phoneNumber, String expectedResult) throws InterruptedException {
+	public void editOutletCustomer(String customerName, String outletName, String province, String region,String address, String longtitudeLatitude, String location, String PIC, String phoneNumber, String expectedResult) throws InterruptedException {
 		Use.SendKeys(searchInput, customerName);
 		Thread.sleep(2000);
 		listOutletButton = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("(//a[contains(@data-url,'outlet')]/i)[1][ancestor::tr/td[contains(text(),'"+customerName+"')]]"))));
@@ -208,11 +217,15 @@ public class CustomerAndOutletPage extends BaseConfig{
 		Use.SendKeys(addressInput, address);
 		
 		//open map
-		Use.Click(setPointButton);
-		Use.SendKeys(searchLocationInput, location);
-		Thread.sleep(1500);
-		searchLocationInput.sendKeys(Keys.ENTER);
-		Use.Click(submitMapButton);
+		if(!openStreetMap.isEmpty()) { //if use openstreetmap
+			Use.SendKeys(locationPointInput, longtitudeLatitude);
+		}else {
+			Use.Click(setPointButton);
+			Use.SendKeys(searchLocationInput, location);
+			Thread.sleep(1500);
+			searchLocationInput.sendKeys(Keys.ENTER);
+			Use.Click(submitMapButton);
+		}
 		
 		Use.SendKeys(PICInput, PIC);
 		Use.SendKeys(phoneNumberInput, phoneNumber);

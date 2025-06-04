@@ -11,7 +11,7 @@
 	    	</class>
         </classes>
     </test>
-    <!--<test name="Lead Management - Admin update status">
+    <test name="Lead Management - Admin update status">
         <classes>
             <class name="testCases.LeadManagement">
     			<methods>
@@ -19,7 +19,7 @@
     			</methods>
 	    	</class>
         </classes>
-    </test>-->
+    </test>
     <test name="Expenses Management - Approve or Reject">
         <classes>
             <class name="testCases.ExpensesManagement">
