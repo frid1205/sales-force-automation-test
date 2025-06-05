@@ -1,7 +1,7 @@
 version: '3'
 services:
   android:
-    image: budtmo/docker-android-x86-11.0_r02 # or another version
+    image: budtmo/docker-android:emulator_13.0_v2.1.3-p1 # or another version
     privileged: true
     ports:
       - "6080:6080"  # VNC Web UI
