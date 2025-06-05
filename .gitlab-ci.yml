@@ -1,41 +1,21 @@
-variables: 
-  PROJECT_NAME: ${CI_PROJECT_NAME}
+variables:
+  PROJECT_NAME: "stp-mobile-automation-test"
 
 stages:
   - deployment
-  - run-test
 
-### DEPLOYMENT ############################################################
+## DEPLOYMENT ##########################################################
 deployment:
   stage: deployment
   image: docker:stable
   services:
     - docker:dind
-  before_script:
-    - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${CI_REGISTRY}
-    - docker stop ${PROJECT_NAME} 2> /dev/null || true
-    - docker rm ${PROJECT_NAME} 2> /dev/null || true
-    - docker build -t ${PROJECT_NAME} -f Dockerfile .
-  script:
-    - docker run -d -p 8811:80 --restart unless-stopped --name=${PROJECT_NAME}  ${PROJECT_NAME}
-  only:
-    - master
-    - ci
-  tags:
-    - biznet-lumos-dev
 
-### RUN TEST ############################################################
-run-test:
-  stage: run-test
-  image: docker:stable
-  services:
-    - docker:dind
   script:
-    - docker exec sales-force-automation-test /bin/bash -c "./run_test.sh"
+    - docker compose -f compose.yml up -d
+   
   only:
-    - master
-    - ci
+    - mobile-automation-ci
   tags:
-    - biznet-lumos-dev
-  when: manual  
-    
+    - hostinger-lumos-pro
+  when: manual
