@@ -1,0 +1,16 @@
+version: '3'
+services:
+  android:
+    image: budtmo/docker-android-x86-11.0  # or another version
+    privileged: true
+    ports:
+      - "6080:6080"  # VNC Web UI
+      - "4723:4723"  # Appium server
+    environment:
+      - DEVICE=Samsung Galaxy S10
+      - AUTO_START=true
+      - APPIUM=true
+    volumes:
+      - /dev/bus/usb:/dev/bus/usb
+      - /root/storage/stp-automation-test/stp.apk:/root/stp.apk
+
