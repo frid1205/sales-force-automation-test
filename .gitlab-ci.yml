@@ -13,6 +13,8 @@ deployment:
 
   before_script:
     - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${CI_REGISTRY}  
+    - docker stop ${PROJECT_NAME} 2> /dev/null || true
+    - docker rm ${PROJECT_NAME} 2> /dev/null || true
 
   script:
     - docker compose -f compose.yml up -d
