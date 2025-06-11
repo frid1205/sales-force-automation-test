@@ -32,6 +32,15 @@ RUN CHROME_DRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_
 # Set environment variables
 ENV CHROME_DRIVER_PATH=/usr/local/bin/chromedriver
 
+# Install Node.js (if not already)
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs
+
+# Install Appium CLI
+RUN npm install -g appium
+
+# Install UiAutomator2 driver
+RUN appium driver install uiautomator2
 
 # Copy test project into container
 COPY . /root/automation-tests
