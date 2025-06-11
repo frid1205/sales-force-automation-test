@@ -1,5 +1,5 @@
 # Use budtmo as base image
-FROM budtmo/docker-android-x86-11.0
+FROM budtmo/docker-android:emulator_13.0_v2.1.3-p1
 
 USER root
 
