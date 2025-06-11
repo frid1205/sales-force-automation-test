@@ -18,7 +18,8 @@ deployment:
     - docker rm ${PROJECT_NAME} 2> /dev/null || true
 
   script:
-    - docker compose -f compose.yml up -d
+    - docker compose build --no-cache
+    - docker compose up -d
    
   only:
     - mobile-automation-ci
