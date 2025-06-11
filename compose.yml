@@ -2,6 +2,7 @@ version: '3'
 services:
   android:
     container_name: stp-mobile-automation-test
+    image: stp-mobile-automation-test
     build:
       context: .
       dockerfile: Dockerfile
