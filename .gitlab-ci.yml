@@ -3,6 +3,7 @@ variables:
 
 stages:
   - deployment
+  - run-test
 
 ## DEPLOYMENT ##########################################################
 deployment:
@@ -24,3 +25,17 @@ deployment:
   tags:
     - hostinger-lumos-pro
   when: manual
+
+### RUN TEST ############################################################
+run-test:
+  stage: run-test
+  image: docker:stable
+  services:
+    - docker:dind
+  script:
+    - docker exec stp-mobile-automation-test /bin/bash -c "mvn test"
+  only:
+    - mobile-automation-ci
+  tags:
+    - hostinger-lumos-pro
+  when: manual  
