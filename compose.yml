@@ -10,10 +10,13 @@ services:
     ports:
       - "6080:6080"  # VNC Web UI
       - "4723:4723"  # Appium server
+      - "5554:5554"   # Emulator
+      - "5555:5555"   # ADB
     environment:
-      - DEVICE=Samsung Galaxy S10
+      - DEVICE=Nexus 5
       - AUTO_START=true
       - APPIUM=true
+      - CONNECT_TO_GRID=false
     volumes:
       - /dev/bus/usb:/dev/bus/usb
       - /root/storage/stp-automation-test/stp.apk:/root/stp.apk
