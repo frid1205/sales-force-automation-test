@@ -24,7 +24,7 @@ deployment:
   only:
     - mobile-automation-ci
   tags:
-    - hostinger-lumos-pro
+    - biznet-lumos-virtual
   when: manual
 
 ### RUN TEST ############################################################
@@ -38,5 +38,5 @@ run-test:
   only:
     - mobile-automation-ci
   tags:
-    - hostinger-lumos-pro
+    - biznet-lumos-virtual
   when: manual  
