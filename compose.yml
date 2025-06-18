@@ -17,6 +17,7 @@ services:
       - AUTO_START=true
       - APPIUM=true
       - CONNECT_TO_GRID=false
+      - EMULATOR_PARAMS="-no-audio -no-window -gpu swiftshader_indirect"
     volumes:
       - /dev/bus/usb:/dev/bus/usb
       - /root/storage/stp-automation-test/stp.apk:/root/stp.apk
