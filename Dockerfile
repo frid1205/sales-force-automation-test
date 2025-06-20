@@ -1,6 +1,11 @@
 # Use budtmo as base image
 FROM budtmo/docker-android:emulator_13.0_v2.1.3-p1
 
+# Enable User root
+USER root
+RUN apt-get update && apt-get install -y bash passwd
+RUN echo "root:x:0:0:root:/root:/bin/bash" >> /etc/passwd
+
 # Install Java + Maven
 RUN apt-get update && apt-get install -y \
     openjdk-21-jdk \
@@ -42,11 +47,6 @@ RUN appium driver install uiautomator2
 
 # Install nano editor
 RUN apt-get install nano
-
-# Enable User root
-USER root
-RUN apt-get update && apt-get install -y bash passwd
-RUN echo "root:x:0:0:root:/root:/bin/bash" >> /etc/passwd
 
 # Copy test project into container
 COPY . /root/automation-tests
