@@ -42,6 +42,9 @@ RUN npm install -g appium
 # Install UiAutomator2 driver
 RUN appium driver install uiautomator2
 
+# Install nano editor
+RUN apt-get install nano
+
 # Copy test project into container
 COPY . /root/automation-tests
 
