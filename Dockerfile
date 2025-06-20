@@ -45,6 +45,14 @@ RUN npm install -g appium
 # Install UiAutomator2 driver
 RUN appium driver install uiautomator2
 
+# Configure Appium to run with --allow-insecure=adb_shell
+RUN echo "[program:appium]" > /etc/supervisor/conf.d/appium.conf && \
+    echo "command=/usr/local/bin/appium --allow-insecure=adb_shell --base-path /wd/hub" >> /etc/supervisor/conf.d/appium.conf && \
+    echo "autostart=true" >> /etc/supervisor/conf.d/appium.conf && \
+    echo "autorestart=true" >> /etc/supervisor/conf.d/appium.conf && \
+    echo "stderr_logfile=/var/log/appium.err.log" >> /etc/supervisor/conf.d/appium.conf && \
+    echo "stdout_logfile=/var/log/appium.out.log" >> /etc/supervisor/conf.d/appium.conf
+
 # Install nano editor
 RUN apt-get install nano
 
