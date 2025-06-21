@@ -3,8 +3,8 @@ FROM budtmo/docker-android:emulator_13.0_v2.1.3-p1
 
 # Enable User root
 USER root
-# RUN apt-get update && apt-get install -y bash passwd
-# RUN echo "root:x:0:0:root:/root:/bin/bash" >> /etc/passwd
+RUN apt-get update && apt-get install -y bash passwd
+RUN echo "root:x:0:0:root:/root:/bin/bash" >> /etc/passwd
 
 # Install Java + Maven
 RUN apt-get update && apt-get install -y \
@@ -46,12 +46,12 @@ RUN npm install -g appium
 RUN appium driver install uiautomator2
 
 # Configure Appium to run with --allow-insecure=adb_shell
-# RUN echo "[program:appium]" > /etc/supervisor/conf.d/appium.conf && \
-#    echo "command=/usr/local/bin/appium --allow-insecure=adb_shell --base-path /wd/hub" >> /etc/supervisor/conf.d/appium.conf && \
-#    echo "autostart=true" >> /etc/supervisor/conf.d/appium.conf && \
-#    echo "autorestart=true" >> /etc/supervisor/conf.d/appium.conf && \
-#    echo "stderr_logfile=/var/log/appium.err.log" >> /etc/supervisor/conf.d/appium.conf && \
-#    echo "stdout_logfile=/var/log/appium.out.log" >> /etc/supervisor/conf.d/appium.conf
+RUN echo "[program:appium]" > /etc/supervisor/conf.d/appium.conf && \
+   echo "command=/usr/local/bin/appium --allow-insecure=adb_shell --base-path /wd/hub" >> /etc/supervisor/conf.d/appium.conf && \
+   echo "autostart=true" >> /etc/supervisor/conf.d/appium.conf && \
+   echo "autorestart=true" >> /etc/supervisor/conf.d/appium.conf && \
+   echo "stderr_logfile=/var/log/appium.err.log" >> /etc/supervisor/conf.d/appium.conf && \
+   echo "stdout_logfile=/var/log/appium.out.log" >> /etc/supervisor/conf.d/appium.conf
 
 # Install nano editor
 RUN apt-get install nano
