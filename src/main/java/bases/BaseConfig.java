@@ -180,6 +180,9 @@ public class BaseConfig {
 		}
 
 		try {
+			// Set capability before driver is created
+			options.setCapability("uiautomator2ServerLaunchTimeout", 120000);
+
 			// Inisialisasi AndroidDriver dengan UiAutomator2Options
 			if(isCloud.equals("true")) {
 			    String username = "lumoshiveindones_TDMlAk";
