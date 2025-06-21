@@ -40,16 +40,16 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs
 
 # Install Appium CLI
-# RUN npm install -g appium
+RUN npm install -g appium
 
 # Install UiAutomator2 driver
-# RUN appium driver install uiautomator2
+RUN appium driver install uiautomator2
 
 # Install supervisor
-# RUN apt-get update && apt-get install -y supervisor
+RUN apt-get update && apt-get install -y supervisor
 
 # Copy a custom supervisord config
-# COPY supervisord.conf /etc/supervisor/supervisord.conf
+COPY supervisord.conf /etc/supervisor/supervisord.conf
 
 # Install nano editor
 RUN apt-get install nano
