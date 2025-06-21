@@ -40,18 +40,13 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs
 
 # Install Appium CLI
-RUN npm install -g appium --allow-insecure=adb_shell
+RUN npm install -g appium
 
 # Install UiAutomator2 driver
 RUN appium driver install uiautomator2
 
-# Configure Appium to run with --allow-insecure=adb_shell
-# RUN echo "[program:appium]" > /etc/supervisor/conf.d/appium.conf && \
-#   echo "command=/usr/local/bin/appium --allow-insecure=adb_shell --base-path /wd/hub" >> /etc/supervisor/conf.d/appium.conf && \
-#   echo "autostart=true" >> /etc/supervisor/conf.d/appium.conf && \
-#   echo "autorestart=true" >> /etc/supervisor/conf.d/appium.conf && \
-#   echo "stderr_logfile=/var/log/appium.err.log" >> /etc/supervisor/conf.d/appium.conf && \
-#   echo "stdout_logfile=/var/log/appium.out.log" >> /etc/supervisor/conf.d/appium.conf
+# Set Appium to run with the insecure feature
+ENV APPIUM_ARGS=--allow-insecure=adb_shell
 
 # Install nano editor
 RUN apt-get install nano
@@ -66,4 +61,4 @@ RUN mvn dependency:resolve
 
 # CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]
 
-CMD ["appium", "--allow-insecure=adb_shell"]
+CMD ["appium"]
