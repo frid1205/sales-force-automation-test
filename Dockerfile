@@ -45,7 +45,7 @@ RUN npm install -g appium
 # Install UiAutomator2 driver
 RUN appium driver install uiautomator2
 
-RUN appium --allow-insecure=adb_shell
+# RUN appium --allow-insecure=adb_shell
 
 # Install supervisor
 # RUN apt-get update && apt-get install -y supervisor
@@ -64,4 +64,6 @@ WORKDIR /root/automation-tests
 # Pre-download Maven dependencies (optional)
 RUN mvn dependency:resolve
 
-CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]
+# CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]
+
+CMD ["appium", "--allow-insecure=adb_shell"]
