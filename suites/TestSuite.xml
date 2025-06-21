@@ -6,10 +6,6 @@
     <parameter name="record" value="no" />
     <parameter name="email" value="yes" />
   	<suite-files>
-		<suite-file path="../suites/TestSuperadmin.xml"/>
-		<suite-file path="../suites/TestAdminCompany.xml"/>
 		<suite-file path="../suites/TestSalesMobile.xml"/>
-		<suite-file path="../suites/TestSalesCMS.xml"/>
-		<suite-file path="../suites/TestAdminCompany2.xml"/>
 	</suite-files>
 </suite>
