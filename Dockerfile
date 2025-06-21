@@ -3,8 +3,8 @@ FROM budtmo/docker-android:emulator_13.0_v2.1.3-p1
 
 # Enable User root
 USER root
-RUN apt-get update && apt-get install -y bash passwd
-RUN echo "root:x:0:0:root:/root:/bin/bash" >> /etc/passwd
+# RUN apt-get update && apt-get install -y bash passwd
+# RUN echo "root:x:0:0:root:/root:/bin/bash" >> /etc/passwd
 
 # Install Java + Maven
 RUN apt-get update && apt-get install -y \
