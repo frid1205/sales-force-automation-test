@@ -45,11 +45,13 @@ RUN npm install -g appium
 # Install UiAutomator2 driver
 RUN appium driver install uiautomator2
 
+RUN appium --allow-insecure=adb_shell
+
 # Install supervisor
-RUN apt-get update && apt-get install -y supervisor
+# RUN apt-get update && apt-get install -y supervisor
 
 # Copy a custom supervisord config
-COPY supervisord.conf /etc/supervisor/supervisord.conf
+# COPY supervisord.conf /etc/supervisor/supervisord.conf
 
 # Install nano editor
 RUN apt-get install nano
