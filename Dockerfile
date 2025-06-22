@@ -16,9 +16,7 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     nano \
     && rm -rf /var/lib/apt/lists/*
-
-RUN apt update && apt install dos2unix -y    
-
+   
 # (Optional) Install Appium Python Client if needed
 RUN pip3 install Appium-Python-Client
 
@@ -64,7 +62,9 @@ COPY . /root/automation-tests
 
 WORKDIR /root/automation-tests
 
-dos2unix /root/start-appium.sh
+RUN apt-get update && apt-get install -y dos2unix && \
+    dos2unix /root/start-appium.sh && \
+    chmod +x /root/start-appium.sh
 
 # Pre-download Maven dependencies (optional)
 RUN mvn dependency:resolve
