@@ -3,6 +3,7 @@ variables:
 
 stages:
   - deployment
+  - start-appium
   - run-test
 
 ## DEPLOYMENT ##########################################################
@@ -18,7 +19,6 @@ deployment:
     - docker rm ${PROJECT_NAME} 2> /dev/null || true
 
   script:
-    - docker compose down --volumes --remove-orphans
     - docker compose build --no-cache
     - docker compose up -d
    
@@ -27,6 +27,20 @@ deployment:
   tags:
     - biznet-lumos-virtual
   when: manual
+
+### START APPIUM ############################################################
+start-appium:
+  stage: start-appium
+  image: docker:stable
+  services:
+    - docker:dind
+  script:
+    - docker exec stp-mobile-automation-test /bin/bash -c "./start-appium.sh"
+  only:
+    - mobile-automation-ci
+  tags:
+    - biznet-lumos-virtual
+  when: manual    
 
 ### RUN TEST ############################################################
 run-test:
