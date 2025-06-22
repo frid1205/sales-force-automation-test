@@ -6,6 +6,9 @@ sdkmanager --list
 echo "Get Device Available"
 avdmanager list avd
 
+echo "Running emulator"
+emulator -avd nexus_5_13.0
+
 echo "See avaliable emulator"
 adb devices
 
