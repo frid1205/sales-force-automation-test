@@ -90,15 +90,22 @@ public class TestListener extends BaseConfig implements ISuiteListener, ITestLis
 
         try {
             String base64Image;
-            if (context.getSuite().getName().contains("Mobile")) {
-                base64Image = ((TakesScreenshot) getMDriver()).getScreenshotAs(OutputType.BASE64);
-            } else {
-                base64Image = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BASE64);
-            }
+            // FIX: get context from result
+            String suiteName = result.getTestContext().getSuite().getName();
 
-            test.fail(result.getMethod().getMethodName() + " : Test Failed\nError: " + result.getThrowable().getMessage() +
-                    "\n" + errorDetails,
-                    MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());
+            if (suiteName != null && suiteName.contains("Mobile")) {
+                if (getMDriver() != null) {
+                    base64Image = ((TakesScreenshot) getMDriver()).getScreenshotAs(OutputType.BASE64);
+                } else {
+                    base64Image = null;
+                }
+            } else {
+                if (getDriver() != null) {
+                    base64Image = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BASE64);
+                } else {
+                    base64Image = null;
+                }
+            }
         } catch (Exception e) {
             test.fail(result.getMethod().getMethodName() + " : Test Failed\nError: " + result.getThrowable().getMessage() +
                     "\n" + errorDetails);
