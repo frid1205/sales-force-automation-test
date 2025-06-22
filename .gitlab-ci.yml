@@ -6,6 +6,7 @@ stages:
   - start-appium
   - pre-test
   - run-test
+  - kill-emulator
 
 ## DEPLOYMENT ##########################################################
 deployment:
@@ -70,3 +71,17 @@ run-test:
   tags:
     - biznet-lumos-virtual
   when: manual  
+
+### KILL EMULATOR ############################################################
+kill-emulator:
+  stage: kill-emulator
+  image: docker:stable
+  services:
+    - docker:dind
+  script:
+    - docker exec stp-mobile-automation-test /bin/bash -c "adb -s emulator-5554 emu kill"
+  only:
+    - mobile-automation-ci
+  tags:
+    - biznet-lumos-virtual
+  when: manual    
