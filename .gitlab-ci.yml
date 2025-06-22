@@ -4,6 +4,7 @@ variables:
 stages:
   - deployment
   - start-appium
+  - pre-test
   - run-test
 
 ## DEPLOYMENT ##########################################################
@@ -29,6 +30,20 @@ deployment:
   when: manual
 
 ### START APPIUM ############################################################
+pre-test:
+  stage: pre-test
+  image: docker:stable
+  services:
+    - docker:dind
+  script:
+    - docker exec stp-mobile-automation-test /bin/bash -c "./pre_emu.sh"
+  only:
+    - mobile-automation-ci
+  tags:
+    - biznet-lumos-virtual
+  when: manual 
+
+### PRE TEST ############################################################
 start-appium:
   stage: start-appium
   image: docker:stable
@@ -40,7 +55,7 @@ start-appium:
     - mobile-automation-ci
   tags:
     - biznet-lumos-virtual
-  when: manual    
+  when: manual     
 
 ### RUN TEST ############################################################
 run-test:
