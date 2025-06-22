@@ -64,6 +64,8 @@ WORKDIR /root/automation-tests
 # Pre-download Maven dependencies (optional)
 RUN mvn dependency:resolve
 
-CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]
+# CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]
 
 # CMD ["appium", "--allow-insecure=adb_shell"]
+
+CMD ["appium", "--allow-insecure", "adb_shell"]
