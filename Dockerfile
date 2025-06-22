@@ -63,8 +63,8 @@ COPY . /root/automation-tests
 WORKDIR /root/automation-tests
 
 RUN apt-get update && apt-get install -y dos2unix && \
-    dos2unix /root/automation-tests/start-appium.sh && \
-    chmod +x /root/automation-tests/start-appium.sh
+    dos2unix /root/automation-tests/start-appium.sh /root/automation-tests/pre_emu.sh && \
+    chmod +x /root/automation-tests/start-appium.sh /root/automation-tests/pre_emu.sh
 
 # Pre-download Maven dependencies (optional)
 RUN mvn dependency:resolve
