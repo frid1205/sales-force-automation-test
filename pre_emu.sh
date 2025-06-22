@@ -1,5 +1,14 @@
 #!/bin/bash
 
+echo "Get SDK List"
+sdkmanager --list
+
+echo "Get Device Available"
+avdmanager list avd
+
+echo "See avaliable emulator"
+adb devices
+
 DEVICE_ID="emulator-5554"
 
 echo "Waiting for $DEVICE_ID to boot..."
@@ -24,3 +33,10 @@ while true; do
 
   sleep 2
 done
+
+# Install the APK
+echo "Installing APK..."
+adb -s $DEVICE_ID install -g /root/stp.apk
+
+echo "Check emulator status"
+curl http://localhost:4723/status
