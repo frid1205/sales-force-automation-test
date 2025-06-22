@@ -14,9 +14,10 @@ RUN apt-get update && apt-get install -y \
     unzip \
     gnupg \
     python3-pip \
-    dos2unix \
     nano \
     && rm -rf /var/lib/apt/lists/*
+
+RUN apt update && apt install dos2unix -y    
 
 # (Optional) Install Appium Python Client if needed
 RUN pip3 install Appium-Python-Client
