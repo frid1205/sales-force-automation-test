@@ -37,7 +37,7 @@ pre-test:
   services:
     - docker:dind
   script:
-    - docker exec stp-mobile-automation-test /bin/bash -c "./pre_emu.sh"
+    - docker exec stp-mobile-automation-test /bin/bash -c "./pre_test.sh"
   only:
     - mobile-automation-ci
   tags:
