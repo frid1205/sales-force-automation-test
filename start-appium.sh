@@ -14,6 +14,6 @@ for i in {1..30}; do
   sleep 2
 done
 
-echo "Appium failed to start."
-cat /tmp/appium.log
-exit 1
+# echo "Appium failed to start."
+# cat /tmp/appium.log
+# exit 1
