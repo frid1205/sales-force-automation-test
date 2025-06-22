@@ -20,7 +20,7 @@ deployment:
   script:
     - docker compose down --volumes --remove-orphans
     - docker compose build --no-cache
-    - docker compose up
+    - docker compose up -d
    
   only:
     - mobile-automation-ci
