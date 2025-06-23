@@ -47,16 +47,18 @@ RUN npm install -g appium
 # Install UiAutomator2 driver
 RUN appium driver install uiautomator2
 
-# Copy test project into container
-COPY . /root/automation-tests
-
-WORKDIR /root/automation-tests
+ENV APPIUM_HOME=/root/.appium
 
 RUN npm install -g lerna@6 \
  && git clone https://github.com/appium/appium-plugins.git \
  && cd appium-plugins/packages/execute-driver \
  && npm install \
  && npx appium plugin install --source=local .
+
+# Copy test project into container
+COPY . /root/automation-tests
+
+WORKDIR /root/automation-tests
 
 RUN apt-get update && apt-get install -y dos2unix && \
     dos2unix /root/automation-tests/start-appium.sh /root/automation-tests/pre_test.sh && \
