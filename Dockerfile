@@ -47,13 +47,13 @@ RUN npm install -g appium
 # Install UiAutomator2 driver
 RUN appium driver install uiautomator2
 
-RUN npm install -g lerna@6 \
- && git clone https://github.com/appium/appium-plugins.git \
- && cd appium-plugins/packages/execute-driver \
- && npm install \
- && npx appium plugin install --source=local .
+# RUN npm install -g lerna@6 \
+#  && git clone https://github.com/appium/appium-plugins.git \
+#  && cd appium-plugins/packages/execute-driver \
+#  && npm install \
+#  && npx appium plugin install --source=local .
 
-ENV APPIUM_HOME=/root/.appium 
+# ENV APPIUM_HOME=/root/.appium 
 
 # Copy test project into container
 COPY . /root/automation-tests
