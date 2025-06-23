@@ -7,7 +7,12 @@ echo "Get Device Available"
 avdmanager list avd
 
 echo "Running emulator"
-emulator -avd nexus_5_13.0
+if ! pgrep -f "emulator.*nexus_5_13.0" > /dev/null; then
+  echo "Starting emulator..."
+  nohup emulator -avd nexus_5_13.0 > /dev/null 2>&1 &
+else
+  echo "Emulator already running. Skipping..."
+fi
 
 echo "See avaliable emulator"
 adb devices
