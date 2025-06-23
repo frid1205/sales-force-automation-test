@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# Install execute-driver plugin
+echo "Install execute-driver plugin"
+npm install -g lerna@6 \
+ && git clone https://github.com/appium/appium-plugins.git \
+ && cd appium-plugins/packages/execute-driver \
+ && npm install \
+ && npx appium plugin install --source=local .
+
+# Check appium plugin list
+echo "check appium plugin list" 
+appium plugin list
+
 # Start Appium in background with --allow-insecure=adb_shell
 echo "Starting Appium..."
 appium --allow-insecure=adb_shell --use-plugins=execute-driver  --relaxed-security > /tmp/appium.log 2>&1 &
