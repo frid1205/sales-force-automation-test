@@ -55,7 +55,17 @@ public class AddCallSchedullerPage extends BaseConfig{
         MUse.click(startTimeButton);
         MUse.click(okTimeButton);
         MUse.click(endTimeButton);
-        MUse.swipeUp(717, 685, 717, 481);
+
+		// REPLACE this:
+        // MUse.swipeUp(717, 685, 717, 481);
+
+		// WITH this:
+    	getMDriver().executeScript("mobile: shell", java.util.Map.of(
+        	"command", "input",
+        	"args", java.util.List.of("swipe", "717", "685", "717", "481", "500")
+    	));
+
+
         MUse.click(okTimeButton);
         MUse.click(customerSelectButton);Thread.sleep(1000);
         customerSelect = getMDriver().findElement(By.xpath("//android.view.View[@content-desc='"+customer+"']"));
