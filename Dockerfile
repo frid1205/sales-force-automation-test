@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y \
     gnupg \
     python3-pip \
     nano \
+    git \
     && rm -rf /var/lib/apt/lists/*
    
 # (Optional) Install Appium Python Client if needed
@@ -46,16 +47,11 @@ RUN npm install -g appium
 # Install UiAutomator2 driver
 RUN appium driver install uiautomator2
 
-# RUN appium --allow-insecure=adb_shell
-
-# Install supervisor
-# RUN apt-get update && apt-get install -y supervisor
-
-# Copy a custom supervisord config
-# COPY supervisord.conf /etc/supervisor/supervisord.conf
-
-# Install nano editor
-# RUN apt-get install nano
+RUN npm install -g lerna@6 \
+ && git clone https://github.com/appium/appium-plugins.git \
+ && cd appium-plugins/packages/execute-driver \
+ && npm install \
+ && npx appium plugin install --source=local .
 
 # Copy test project into container
 COPY . /root/automation-tests
