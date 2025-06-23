@@ -181,6 +181,7 @@ public class BaseConfig {
 
 		try {
 			// Set capability before driver is created
+			options.setCapability("automationName", "UiAutomator2");
 			options.setCapability("uiautomator2ServerLaunchTimeout", 120000);
 			options.setCapability("uiautomator2ServerInstallTimeout", 120000);
 			options.setCapability("adbExecTimeout", 120000); // 120 seconds
