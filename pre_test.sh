@@ -9,17 +9,20 @@ avdmanager list avd
 echo "Running emulator"
 if ! pgrep -f "emulator.*nexus_5_13.0" > /dev/null; then
   echo "Starting emulator..."
-  nohup emulator -avd nexus_5_13.0 > /dev/null 2>&1 &
+  nohup emulator -avd nexus_5_13.0 -no-audio -no-window -gpu swiftshader_indirect > /dev/null 2>&1 &
 else
   echo "Emulator already running. Skipping..."
 fi
 
-echo "See avaliable emulator"
-adb devices
-
 DEVICE_ID="emulator-5554"
 
+echo "Waiting for emulator to appear in adb devices..."
+until adb devices | grep -w "$DEVICE_ID" | grep -w "device"; do
+  sleep 2
+done
+
 echo "Waiting for $DEVICE_ID to boot..."
+adb -s $DEVICE_ID wait-for-device
 
 # Wait for sys.boot_completed
 while [[ "$(adb -s $DEVICE_ID shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')" != "1" ]]; do
@@ -42,9 +45,19 @@ while true; do
   sleep 2
 done
 
+# Extra delay for stability
+echo "Waiting additional 30 seconds for stability..."
+sleep 30
+
 # Install the APK
 echo "Installing APK..."
-adb -s $DEVICE_ID install -g /root/stp.apk
+if ! adb -s $DEVICE_ID install -g /root/stp.apk; then
+  echo "APK installation failed. Exiting..."
+  adb -s $DEVICE_ID shell logcat -d | tail -n 50
+  exit 1
+fi
+
+echo "APK installed successfully."
 
 echo "Check emulator status"
 curl http://localhost:4723/status
