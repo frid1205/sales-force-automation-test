@@ -57,6 +57,7 @@ public class MUse extends BaseConfig {
 	
 	public static void click(WebElement element) throws InterruptedException {
 		try{
+			Thread.sleep(1000);
 			getWait().until(ExpectedConditions.elementToBeClickable(element)).click();
 		}catch(Exception e) {
 			Actions actions = new Actions(getMDriver());

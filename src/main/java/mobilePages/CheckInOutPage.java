@@ -28,7 +28,7 @@ public class CheckInOutPage extends BaseConfig{
 	@FindBy (xpath="//android.view.View[contains(@content-desc,'Take a picture')]")
 	WebElement checkInPhotoButton;
 	
-	@FindBy (xpath="//android.widget.ImageView")
+	@FindBy (xpath="//android.view.View/android.widget.ImageView")
 	WebElement takeAPictureButton;
 	
 	@FindBy (xpath="//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[4]")
@@ -115,8 +115,8 @@ public class CheckInOutPage extends BaseConfig{
                 if(scenario.equals("movelocation")) {
                 	Thread.sleep(60000);
                 }else if(scenario.equals("checkin")) {
-                	MUse.click(checkInPhotoButton);
                 	Thread.sleep(1000);
+                	MUse.click(checkInPhotoButton);
                 	MUse.click(takeAPictureButton);
                 	MUse.click(confirmTakeAPictureButton);
                 	MUse.click(checkInButton);
@@ -132,7 +132,7 @@ public class CheckInOutPage extends BaseConfig{
         	             MUse.swipeUp(470, 1200, 470, 660);
         	             Thread.sleep(1000);
         	             MUse.hideKeyboard();
-        	             productSelectButton = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("(//android.widget.Button[ancestor::android.widget.ScrollView/android.view.View[contains(@content-desc,'Product')]])["+(i+1)+"]"))));
+        	             productSelectButton = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("(//android.widget.Button[ancestor::android.widget.ScrollView/android.view.View[contains(@content-desc,'Product')]])"))));
         	             MUse.click(productSelectButton);  
         	             Thread.sleep(1000);
         	     		 productSelect = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("//android.view.View[@content-desc='"+productName+"']"))));
