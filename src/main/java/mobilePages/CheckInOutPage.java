@@ -129,8 +129,9 @@ public class CheckInOutPage extends BaseConfig{
         	             productName = details[0].trim();
         	             quantity = details[1].trim();
         	             price = details[2].trim();
-        	             
+        	             MUse.swipeUp(470, 1200, 470, 660);
         	             Thread.sleep(1000);
+        	             MUse.hideKeyboard();
         	             productSelectButton = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("(//android.widget.Button[ancestor::android.widget.ScrollView/android.view.View[contains(@content-desc,'Product')]])["+(i+1)+"]"))));
         	             MUse.click(productSelectButton);  
         	             Thread.sleep(1000);
@@ -139,10 +140,11 @@ public class CheckInOutPage extends BaseConfig{
         	             Thread.sleep(1000);
         	             quantityProductInput = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("//android.widget.EditText["+((2*i)+1)+"]"))));
         	             MUse.sendKeys(quantityProductInput, quantity);
-        	             MUse.swipeUp(470, 1200, 470, 660);
+        	             MUse.hideKeyboard();
         	             Thread.sleep(1000);
         	             priceProductInput = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("//android.widget.EditText["+(2*(i+1))+"]"))));
         	             MUse.sendKeys(priceProductInput, price);
+        	             MUse.hideKeyboard();
         	             if (products.length >1 & i+1 < products.length) {
         	            	 addMoreProductButton.click();
         	            	 Thread.sleep(2000);

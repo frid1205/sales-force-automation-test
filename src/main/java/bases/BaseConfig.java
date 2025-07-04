@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -137,6 +138,7 @@ public class BaseConfig {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(90));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(12));
         driver.manage().window().maximize();
+        //driver.manage().window().setSize(new Dimension(800, 600));
         actions = new Actions(driver);
         
         wait = new WebDriverWait(driver, Duration.ofMillis(DEFAULT_TIMEOUT));
@@ -247,12 +249,14 @@ public class BaseConfig {
     }
 	
 	public static void goToUrl(String url) {
-		currentUrl = getDriver().getCurrentUrl();
+		/*currentUrl = getDriver().getCurrentUrl();
         targetUrl = getBaseUrl() + url;
         
         if (!currentUrl.equals(targetUrl)) {
             getDriver().get(targetUrl);
-        }
+        }*/
+		targetUrl = getBaseUrl() + url;
+		getDriver().get(targetUrl);
 	}
 	
 	@AfterSuite

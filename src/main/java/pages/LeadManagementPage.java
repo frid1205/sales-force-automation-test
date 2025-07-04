@@ -227,6 +227,7 @@ public class LeadManagementPage extends BaseConfig{
 				chanceOfWinningSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+chanceOfWinning+"')]")));
 				Use.Click(chanceOfWinningSelectLi);
 			}
+			Thread.sleep(500);
 			Use.Click(saveCardButton);
 			
 			leadManagementAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//div[contains(text(),'"+expectedResult+"')]"))));

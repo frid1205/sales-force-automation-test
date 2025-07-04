@@ -89,5 +89,6 @@ public class ProductPage extends BaseConfig{
 		Use.Click(saveButton);
 		productAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//*[contains(text(),'"+expectedResult+"')]"))));
 		Assert.assertEquals(productAlert.getText(), expectedResult);
+		Thread.sleep(1000);
 	}
 }
