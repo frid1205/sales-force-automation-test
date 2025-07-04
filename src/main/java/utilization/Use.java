@@ -13,7 +13,7 @@ import org.testng.Assert;
 import bases.BaseConfig;
 
 public class Use extends BaseConfig {
-	private static int maxAttempt = 3;
+	private static int maxAttempt = 10;
 	
 	public static void SendKeys(WebElement element, String keysToSend) throws InterruptedException {
 		scrollIntoView(getWait().until(ExpectedConditions.visibilityOf(element)));
