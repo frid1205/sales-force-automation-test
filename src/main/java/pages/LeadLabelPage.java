@@ -44,7 +44,7 @@ public class LeadLabelPage extends BaseConfig{
 		Use.SendKeys(labelNameInput, labelName);
 		Use.SendKeys(labelColorInput, labelColor);
 		Use.Click(addButton);
-		LeadLabelAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//*[contains(text(),'"+expectedResult+"')]"))));
+		LeadLabelAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(LeadLabelAlert.getText(), expectedResult);
 	}
 	
@@ -56,7 +56,7 @@ public class LeadLabelPage extends BaseConfig{
 		Use.SendKeys(labelNameInput, labelName);
 		Use.SendKeys(labelColorInput, labelColor);
 		Use.Click(saveButton);
-		LeadLabelAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//*[contains(text(),'"+expectedResult+"')]"))));
+		LeadLabelAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(LeadLabelAlert.getText(), expectedResult);
 	}
 }

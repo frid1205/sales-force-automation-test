@@ -167,7 +167,7 @@ public class LeadManagementPage extends BaseConfig{
 		}
 		Use.Click(addButton);
 
-		leadManagementAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//div[contains(text(),'"+expectedResult+"')]"))));
+		leadManagementAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(leadManagementAlert.getText(), expectedResult);
 		Use.Click(OKButton);
 	}
@@ -230,7 +230,7 @@ public class LeadManagementPage extends BaseConfig{
 			Thread.sleep(500);
 			Use.Click(saveCardButton);
 			
-			leadManagementAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//div[contains(text(),'"+expectedResult+"')]"))));
+			leadManagementAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'"+expectedResult+"')]")));
 			Assert.assertEquals(leadManagementAlert.getText(), expectedResult);
 			Use.Click(OKButton);
 		}else {
@@ -238,7 +238,7 @@ public class LeadManagementPage extends BaseConfig{
 			Use.SendKeys(commentInput, comment);
 			Use.Click(saveCommentButton);
 			
-			leadManagementCommentAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//div[contains(text(),'"+expectedResult+"')]"))));
+			leadManagementCommentAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'"+expectedResult+"')]")));
 			Assert.assertEquals(leadManagementCommentAlert.getText(), expectedResult);
 			Use.Click(cancelButton);//for closing form modal
 		}

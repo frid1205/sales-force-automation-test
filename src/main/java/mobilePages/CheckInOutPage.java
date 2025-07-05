@@ -132,17 +132,17 @@ public class CheckInOutPage extends BaseConfig{
         	             MUse.swipeUp(470, 1200, 470, 660);
         	             Thread.sleep(1000);
         	             MUse.hideKeyboard();
-        	             productSelectButton = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("(//android.widget.Button[ancestor::android.widget.ScrollView/android.view.View[contains(@content-desc,'Product')]])"))));
+        	             productSelectButton = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("(//android.widget.Button[ancestor::android.widget.ScrollView/android.view.View[contains(@content-desc,'Product')]])")));
         	             MUse.click(productSelectButton);  
         	             Thread.sleep(1000);
-        	     		 productSelect = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("//android.view.View[@content-desc='"+productName+"']"))));
+        	     		 productSelect = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//android.view.View[@content-desc='"+productName+"']")));
         	             MUse.click(productSelect);
         	             Thread.sleep(1000);
-        	             quantityProductInput = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("//android.widget.EditText["+((2*i)+1)+"]"))));
+        	             quantityProductInput = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//android.widget.EditText["+((2*i)+1)+"]")));
         	             MUse.sendKeys(quantityProductInput, quantity);
         	             MUse.hideKeyboard();
         	             Thread.sleep(1000);
-        	             priceProductInput = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("//android.widget.EditText["+(2*(i+1))+"]"))));
+        	             priceProductInput = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//android.widget.EditText["+(2*(i+1))+"]")));
         	             MUse.sendKeys(priceProductInput, price);
         	             MUse.hideKeyboard();
         	             if (products.length >1 & i+1 < products.length) {
@@ -167,7 +167,7 @@ public class CheckInOutPage extends BaseConfig{
                 }else if(scenario.equals("cancel")) {
                 	MUse.click(cancelButton);
                 	MUse.click(reasonSelectButton);
-                	reasonSelect = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("//android.view.View[@content-desc='"+reason+"']"))));
+                	reasonSelect = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//android.view.View[@content-desc='"+reason+"']")));
                 	MUse.click(reasonSelect);
                 	MUse.click(submitButton);
                 	Thread.sleep(8000);

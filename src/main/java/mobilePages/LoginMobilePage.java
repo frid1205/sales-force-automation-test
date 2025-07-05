@@ -34,6 +34,7 @@ public class LoginMobilePage extends BaseConfig{
 	
 	public void testLogin(String email, String password, String expectedResult) throws InterruptedException {
 		MUse.sendKeys(emailInput, email);
+		MUse.hideKeyboard();
 		MUse.sendKeys(passwordInput, password);
 		MUse.hideKeyboard();
 		MUse.swipeUp(462, 1350, 462, 1024);

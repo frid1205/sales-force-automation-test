@@ -82,7 +82,7 @@ public class CallSchedullerPage extends BaseConfig{
 	public void addCallScheduller(String userName, String day, String startTime, String endTime, String customer, String outlet, String taskCategory, String description, String expectedResult) throws InterruptedException {
 		Use.SendKeys(searchInput, userName);
 		Thread.sleep(2000);
-		detailCallSchedullingButton = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//a[contains(@href,'sales/call-scheduling')]/i[ancestor::tr/td[contains(text(),'"+userName+"')]]"))));
+		detailCallSchedullingButton = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@href,'sales/call-scheduling')]/i[ancestor::tr/td[contains(text(),'"+userName+"')]]")));
 		Use.Click(detailCallSchedullingButton);
 		
 		addTaskButton = getWait().until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//button[contains(@onclick,'"+date(day)+"')]"))));
@@ -115,12 +115,12 @@ public class CallSchedullerPage extends BaseConfig{
 		Use.SendKeys(descriptionInput, description);
 		Use.Click(addButton);
 
-		callSchedullerAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//div[contains(text(),'"+expectedResult+"')]"))));
+		callSchedullerAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(callSchedullerAlert.getText(), expectedResult);
 	}
 	
 	public void addCallSchedullerFromLead(String assignTo, String startTime, String endTime, String customer, String outlet, String taskCategory, String description, String expectedResult) throws InterruptedException {
-		addCallSchedullerFromLeadButton = getWait().until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//button[text()='Add task schedule'][ancestor::div/div/div/h2[contains(text(),'"+assignTo+"')]]"))));
+		addCallSchedullerFromLeadButton = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Add task schedule'][ancestor::div/div/div/h2[contains(text(),'"+assignTo+"')]]")));
 		Use.Click(addCallSchedullerFromLeadButton);
 
 		Use.SendKeys(startTimeInput, hours(startTime));
@@ -146,7 +146,7 @@ public class CallSchedullerPage extends BaseConfig{
 		Use.SendKeys(descriptionAddSchedullerLeadInput, description);
 		Use.Click(addButton2);
 
-		callSchedullerAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//div[contains(text(),'"+expectedResult+"')]"))));
+		callSchedullerAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(callSchedullerAlert.getText(), expectedResult);
 	}
 	

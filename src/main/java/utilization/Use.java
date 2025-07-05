@@ -99,7 +99,8 @@ public class Use extends BaseConfig {
 		while(attempt <= maxAttempt) {
 			try {
 				Thread.sleep(500);
-				element.click();
+				getWait().until(ExpectedConditions.elementToBeClickable(element)).click();
+
 				break;
 			} catch(StaleElementReferenceException ex) {
 				System.out.println("waitClickableThenClick StaleElementReferenceException");

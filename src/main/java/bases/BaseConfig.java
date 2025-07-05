@@ -23,6 +23,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.Reporter;
@@ -248,15 +249,11 @@ public class BaseConfig {
         }
     }
 	
-	public static void goToUrl(String url) {
-		/*currentUrl = getDriver().getCurrentUrl();
-        targetUrl = getBaseUrl() + url;
-        
-        if (!currentUrl.equals(targetUrl)) {
-            getDriver().get(targetUrl);
-        }*/
+	public static void goToUrl(String url) throws InterruptedException {
+		Thread.sleep(2000);
 		targetUrl = getBaseUrl() + url;
 		getDriver().get(targetUrl);
+		getWait().until(ExpectedConditions.urlContains(url));
 	}
 	
 	@AfterSuite

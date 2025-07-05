@@ -50,7 +50,7 @@ public class CategoryProductPage extends BaseConfig{
 		Use.Click(addCategoryProductButton);
 		Use.SendKeys(categoryNameInput, categoryProduct);
 		Use.Click(addButton);
-		categoryProductAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//*[contains(text(),'"+expectedResult+"')]"))));
+		categoryProductAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(categoryProductAlert.getText(), expectedResult);
 		Use.Click(OKButton);
 	}
@@ -58,11 +58,11 @@ public class CategoryProductPage extends BaseConfig{
 	public void editCategoryProduct(String categoryProductName, String expectedResult) throws InterruptedException {
 		Use.SendKeys(searchCategoryInput, categoryProductName);
 		Thread.sleep(2500);
-		editCategoryProductButton = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("(//a[contains(@data-url,'category-product/edit')]/i)[1][ancestor::tr/td[contains(text(),'"+categoryProductName+"')]]"))));
+		editCategoryProductButton = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//a[contains(@data-url,'category-product/edit')]/i)[1][ancestor::tr/td[contains(text(),'"+categoryProductName+"')]]")));
 		Use.Click(editCategoryProductButton);
 		Use.SendKeys(categoryNameInput, categoryProductName);
 		Use.Click(saveButton);
-		categoryProductAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//*[contains(text(),'"+expectedResult+"')]"))));
+		categoryProductAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(categoryProductAlert.getText(), expectedResult);
 		Use.Click(OKButton);
 	}

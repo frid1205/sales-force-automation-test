@@ -40,18 +40,18 @@ public class TaskCategoryPage extends BaseConfig{
 		Use.Click(addTaskCategoryButton);
 		Use.SendKeys(taskCategoryNameInput, taskCategoryProduct);
 		Use.Click(addButton);
-		taskCategoryProductAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//*[contains(text(),'"+expectedResult+"')]"))));
+		taskCategoryProductAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(taskCategoryProductAlert.getText(), expectedResult);
 	}
 	
 	public void editTaskCategoryProduct(String taskCategoryProduct, String expectedResult) throws InterruptedException {
 		Use.SendKeys(searchCategoryInput, taskCategoryProduct);
 		Thread.sleep(2000);
-		editTaskCategoryButton = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("(//a[contains(@data-url,'setting/task/edit')]/i)[1][ancestor::tr[td[contains(text(), '"+taskCategoryProduct+"')]]]"))));
+		editTaskCategoryButton = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//a[contains(@data-url,'setting/task/edit')]/i)[1][ancestor::tr[td[contains(text(), '"+taskCategoryProduct+"')]]]")));
 		Use.Click(editTaskCategoryButton);
 		Use.SendKeys(taskCategoryNameInput, taskCategoryProduct);
 		Use.Click(saveButton);
-		taskCategoryProductAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//*[contains(text(),'"+expectedResult+"')]"))));
+		taskCategoryProductAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(taskCategoryProductAlert.getText(), expectedResult);
 	}
 }

@@ -109,14 +109,14 @@ public class CustomerAndOutletPage extends BaseConfig{
 			Use.Click(regionSelectLi);
 		}
 		Use.Click(addButton);
-		customerAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//*[contains(text(),'"+expectedResult+"')]"))));
+		customerAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(customerAlert.getText(), expectedResult);
 	}
 	
 	public void editCustomer(String customerName, String province, String region, String expectedResult) throws InterruptedException {
 		Use.SendKeys(searchInput, customerName);
 		Thread.sleep(2000);
-		listOutletButton = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("(//a[contains(@data-url,'setting/customer/edit')]/i)[1][ancestor::tr/td[contains(text(),'"+customerName+"')]]"))));
+		listOutletButton = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//a[contains(@data-url,'setting/customer/edit')]/i)[1][ancestor::tr/td[contains(text(),'"+customerName+"')]]")));
 		Use.Click(listOutletButton);
 		
 		Use.SendKeys(customerNameInput, customerName);
@@ -137,14 +137,14 @@ public class CustomerAndOutletPage extends BaseConfig{
 			Use.Click(regionSelectLi);
 		}
 		Use.Click(saveButton);
-		customerAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//*[contains(text(),'"+expectedResult+"')]"))));
+		customerAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(customerAlert.getText(), expectedResult);
 	}
 	
 	public void addOutletCustomer(String customerName, String outletName, String province, String region,String address, String longtitudeLatitude, String location, String PIC, String phoneNumber, String expectedResult) throws InterruptedException {
 		Use.SendKeys(searchInput, customerName);
 		Thread.sleep(2500);
-		listOutletButton = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("(//a[contains(@href,'outlet')]/i)[ancestor::tr/td[contains(text(),'"+customerName+"')]]"))));
+		listOutletButton = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//a[contains(@href,'outlet')]/i)[ancestor::tr/td[contains(text(),'"+customerName+"')]]")));
 		Use.Click(listOutletButton);
 		Use.Click(addOutletButton);
 		
@@ -182,19 +182,19 @@ public class CustomerAndOutletPage extends BaseConfig{
 		Use.SendKeys(phoneNumberInput, phoneNumber);
 		Thread.sleep(2000);
 		Use.Click(saveButton);
-		outletAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//*[contains(text(),'"+expectedResult+"')]"))));
+		outletAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(outletAlert.getText(), expectedResult);
 	}
 	
 	public void editOutletCustomer(String customerName, String outletName, String province, String region,String address, String longtitudeLatitude, String location, String PIC, String phoneNumber, String expectedResult) throws InterruptedException {
 		Use.SendKeys(searchInput, customerName);
 		Thread.sleep(2000);
-		listOutletButton = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("(//a[contains(@data-url,'outlet')]/i)[1][ancestor::tr/td[contains(text(),'"+customerName+"')]]"))));
+		listOutletButton = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//a[contains(@data-url,'outlet')]/i)[1][ancestor::tr/td[contains(text(),'"+customerName+"')]]")));
 		Use.Click(listOutletButton);
 
 		Use.SendKeys(searchInput, outletName);
 		Thread.sleep(2000);
-		editOutletButton = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("(//a[contains(@href,'outlet')]/i)[ancestor::tr/td[contains(text(),'"+outletName+"')]]"))));
+		editOutletButton = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//a[contains(@href,'outlet')]/i)[ancestor::tr/td[contains(text(),'"+outletName+"')]]")));
 		Use.Click(editOutletButton);
 		
 		Use.SendKeys(outletNameInput, outletName);
@@ -230,7 +230,7 @@ public class CustomerAndOutletPage extends BaseConfig{
 		Use.SendKeys(PICInput, PIC);
 		Use.SendKeys(phoneNumberInput, phoneNumber);
 		Use.Click(saveButton);
-		outletAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//*[contains(text(),'"+expectedResult+"')]"))));
+		outletAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(outletAlert.getText(), expectedResult);
 	}
 }
