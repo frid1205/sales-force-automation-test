@@ -41,6 +41,7 @@ import io.appium.java_client.Location;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import jakarta.mail.MessagingException;
 import utilization.DB;
 import utilization.Utilize;
 
@@ -60,7 +61,6 @@ public class BaseConfig {
     protected static Connection connection;
     private static Properties properties;
     private static final String CONFIG_FILE = "config.properties";
-    private static String currentUrl;
     private static String targetUrl;
     protected static Location location;
     public static String isCloud = "false";
@@ -173,8 +173,8 @@ public class BaseConfig {
 			options.setPlatformName("Android") 
 				.setDeviceName("emulator-5554") 
 				.setUdid("emulator-5554") 
-				.setAppPackage("com.lumoshive.salestrackpro")
-				.setAppActivity("com.lumoshive.salestrackpro.MainActivity") 
+				//.setAppPackage("com.lumoshive.salestrackpro")
+				//.setAppActivity("com.lumoshive.salestrackpro.MainActivity") 
 				.setIgnoreHiddenApiPolicyError(true)
 				.setApp(Utilize.getAbsolutePath("\\testdata\\STP.apk")) // Path ke file APK
 				.setAutomationName("UiAutomator2")
@@ -323,10 +323,19 @@ public class BaseConfig {
 	}
 	
 	@AfterSuite
-	@Parameters({"record"})
-	public void stopRecording(String record) throws Exception {
+	@Parameters({"record","email"})
+	public void stopRecording(String record, String email) throws Exception {
 		if(record.equals("yes")) {
 			Recording.stopRecording();
 		}
+		
+		if(email.equals("yes")) {
+    		try {
+    			EmailSender.SentEmail();
+    		} catch (MessagingException | IOException e) {
+    			e.printStackTrace();
+    		}
+    	}
 	}
+
 }

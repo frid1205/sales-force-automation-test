@@ -127,7 +127,7 @@ public class UserPage extends BaseConfig{
 		Use.SendKeys(confirmPasswordInput, coPassword);
 		Use.uploadImage(photoProfileInput, Utilize.getAbsolutePath(profilePicture));
 		Use.Click(addButton);
-		userAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//*[contains(text(),'"+expectedResult+"')]"))));
+		userAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(userAlert.getText(), expectedResult);
 	}
 	
@@ -149,7 +149,7 @@ public class UserPage extends BaseConfig{
 		Use.SendKeys(confirmPasswordInput, coPassword);
 		Use.uploadImage(photoProfileInput, Utilize.getAbsolutePath(profilePicture));
 		Use.Click(saveButton);
-		userAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//*[contains(text(),'"+expectedResult+"')]"))));
+		userAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(userAlert.getText(), expectedResult);
 	}
 }
