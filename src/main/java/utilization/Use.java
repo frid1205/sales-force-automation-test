@@ -103,17 +103,17 @@ public class Use extends BaseConfig {
 
 				break;
 			} catch(StaleElementReferenceException ex) {
-				System.out.println("waitClickableThenClick StaleElementReferenceException");
+				System.out.println(ex);
 				if (attempt == maxAttempt) {
 					Assert.assertEquals(true, false, "Element cannot be clicked");
 				}
 			} catch(ElementClickInterceptedException ex) {
-				System.out.println("waitClickableThenClick ElementClickInterceptedException");
+				System.out.println(ex);
 				if (attempt == maxAttempt) {
 					Assert.assertEquals(true, false, "Element cannot be clicked");
 				}
 			} catch(ElementNotInteractableException ex) {
-				System.out.println("waitClickableThenClick ElementNotInteractableException");
+				System.out.println(ex);
 				if (attempt == maxAttempt) {
 					Assert.assertEquals(true, false, "Element cannot be clicked");
 				}

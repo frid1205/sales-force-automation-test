@@ -75,7 +75,7 @@ public class TestListener extends BaseConfig implements ISuiteListener, ITestLis
     public void onTestFailure(ITestResult result) {
         String errorDetails = "";
 
-        if (result.getThrowable() != null) {
+        /*if (result.getThrowable() != null) {
             StackTraceElement[] stackTrace = result.getThrowable().getStackTrace();
             for (StackTraceElement element : stackTrace) {
                 if (element.getClassName().contains("testCases")) {
@@ -86,7 +86,7 @@ public class TestListener extends BaseConfig implements ISuiteListener, ITestLis
                     break;
                 }
             }
-        }
+        }*/
 
         try {
             String base64Image;
@@ -97,11 +97,11 @@ public class TestListener extends BaseConfig implements ISuiteListener, ITestLis
             }
 
             test.fail(result.getMethod().getMethodName() + " : Test Failed\nError: " + result.getThrowable().getMessage() +
-                    "\n" + errorDetails,
+                    "\n" + result.getThrowable(),
                     MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());
         } catch (Exception e) {
             test.fail(result.getMethod().getMethodName() + " : Test Failed\nError: " + result.getThrowable().getMessage() +
-                    "\n" + errorDetails);
+                    "\n" + result.getThrowable());
             e.printStackTrace();
         }
 

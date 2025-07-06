@@ -28,7 +28,7 @@ public class CheckInOutPage extends BaseConfig{
 	@FindBy (xpath="//android.view.View[contains(@content-desc,'Take a picture')]")
 	WebElement checkInPhotoButton;
 	
-	@FindBy (xpath="//android.view.View/android.widget.ImageView")
+	@FindBy (xpath="//android.widget.ImageView")
 	WebElement takeAPictureButton;
 	
 	@FindBy (xpath="//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[4]")
@@ -115,8 +115,8 @@ public class CheckInOutPage extends BaseConfig{
                 if(scenario.equals("movelocation")) {
                 	Thread.sleep(60000);
                 }else if(scenario.equals("checkin")) {
-                	Thread.sleep(1000);
                 	MUse.click(checkInPhotoButton);
+                	Thread.sleep(1000);
                 	MUse.click(takeAPictureButton);
                 	MUse.click(confirmTakeAPictureButton);
                 	MUse.click(checkInButton);
@@ -129,26 +129,25 @@ public class CheckInOutPage extends BaseConfig{
         	             productName = details[0].trim();
         	             quantity = details[1].trim();
         	             price = details[2].trim();
-        	             MUse.swipeUp(470, 1200, 470, 660);
+        	             
         	             Thread.sleep(1000);
-        	             MUse.hideKeyboard();
-        	             productSelectButton = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("(//android.widget.Button[ancestor::android.widget.ScrollView/android.view.View[contains(@content-desc,'Product')]])")));
+        	             productSelectButton = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("(//android.widget.Button[ancestor::android.widget.ScrollView/android.view.View[contains(@content-desc,'Product')]])["+(i+1)+"]"))));
         	             MUse.click(productSelectButton);  
         	             Thread.sleep(1000);
-        	     		 productSelect = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//android.view.View[@content-desc='"+productName+"']")));
+        	     		 productSelect = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("//android.view.View[@content-desc='"+productName+"']"))));
         	             MUse.click(productSelect);
         	             Thread.sleep(1000);
-        	             quantityProductInput = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//android.widget.EditText["+((2*i)+1)+"]")));
+        	             quantityProductInput = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("//android.widget.EditText["+((2*i)+1)+"]"))));
         	             MUse.sendKeys(quantityProductInput, quantity);
         	             MUse.hideKeyboard();
         	             Thread.sleep(1000);
-        	             priceProductInput = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//android.widget.EditText["+(2*(i+1))+"]")));
+        	             priceProductInput = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("//android.widget.EditText["+(2*(i+1))+"]"))));
         	             MUse.sendKeys(priceProductInput, price);
         	             MUse.hideKeyboard();
         	             if (products.length >1 & i+1 < products.length) {
         	            	 addMoreProductButton.click();
         	            	 Thread.sleep(2000);
-        	            	 MUse.swipeUp(430, 1286, 430, 1000);
+        	            	 MUse.swipeUp(470, 1648, 470, 1046);
         	             }
         	         }
         	         MUse.click(checkOutPhotoButton);
@@ -167,7 +166,7 @@ public class CheckInOutPage extends BaseConfig{
                 }else if(scenario.equals("cancel")) {
                 	MUse.click(cancelButton);
                 	MUse.click(reasonSelectButton);
-                	reasonSelect = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//android.view.View[@content-desc='"+reason+"']")));
+                	reasonSelect = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("//android.view.View[@content-desc='"+reason+"']"))));
                 	MUse.click(reasonSelect);
                 	MUse.click(submitButton);
                 	Thread.sleep(8000);

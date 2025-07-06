@@ -138,8 +138,8 @@ public class BaseConfig {
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(90));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(12));
-        driver.manage().window().maximize();
-        //driver.manage().window().setSize(new Dimension(800, 600));
+        //driver.manage().window().maximize();
+        driver.manage().window().setSize(new Dimension(800, 600));
         actions = new Actions(driver);
         
         wait = new WebDriverWait(driver, Duration.ofMillis(DEFAULT_TIMEOUT));
