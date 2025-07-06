@@ -116,7 +116,7 @@ public class CheckInOutPage extends BaseConfig{
                 	Thread.sleep(60000);
                 }else if(scenario.equals("checkin")) {
                 	MUse.click(checkInPhotoButton);
-                	Thread.sleep(1000);
+                	Thread.sleep(5000);
                 	MUse.click(takeAPictureButton);
                 	MUse.click(confirmTakeAPictureButton);
                 	MUse.click(checkInButton);
@@ -139,7 +139,7 @@ public class CheckInOutPage extends BaseConfig{
         	             Thread.sleep(1000);
         	             quantityProductInput = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("//android.widget.EditText["+((2*i)+1)+"]"))));
         	             MUse.sendKeys(quantityProductInput, quantity);
-        	             MUse.hideKeyboard();
+        	             MUse.swipeUp(470, 1648, 470, 1046);
         	             Thread.sleep(1000);
         	             priceProductInput = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("//android.widget.EditText["+(2*(i+1))+"]"))));
         	             MUse.sendKeys(priceProductInput, price);

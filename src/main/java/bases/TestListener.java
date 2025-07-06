@@ -100,7 +100,7 @@ public class TestListener extends BaseConfig implements ISuiteListener, ITestLis
                     "\n" + result.getThrowable(),
                     MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());
         } catch (Exception e) {
-            test.fail(result.getMethod().getMethodName() + " : Test Failed\nError: " + result.getThrowable().getMessage() +
+            test.fail(result.getMethod().getMethodName() + " : (exception) Test Failed\nError: " + result.getThrowable().getMessage() +
                     "\n" + result.getThrowable());
             e.printStackTrace();
         }
