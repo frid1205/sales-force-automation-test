@@ -127,25 +127,25 @@ public class CallSchedullerPage extends BaseConfig{
 		Use.SendKeys(endTimeInput, hours(endTime));
 		if(!customer.equals("")) {
 			Use.Click(customerSelectButton);
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			customerSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+customer+"')]")));
 			Use.Click(customerSelectLi);
 		}
 		if(!outlet.equals("")) {
 			Use.Click(outletSelectButton);
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			outletSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+outlet+"')]")));
 			Use.Click(outletSelectLi);
 		}
 		if(!taskCategory.equals("")) {			
 			Use.Click(taskSelectButton);
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			taskSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+taskCategory+"')]")));
 			Use.Click(taskSelectLi);
 		}
 		Use.SendKeys(descriptionAddSchedullerLeadInput, description);
 		Use.Click(addButton2);
-
+		Thread.sleep(2000);
 		callSchedullerAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(callSchedullerAlert.getText(), expectedResult);
 	}

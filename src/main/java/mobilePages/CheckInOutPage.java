@@ -92,14 +92,14 @@ public class CheckInOutPage extends BaseConfig{
 	String[] products, details;
 	
 	public void checkInOut(String scenario, String longtitude, String latitude, String status, String outlet, String customer, String dataProduct, String attachmentCheckout, String reason) throws InterruptedException {
-		Thread.sleep(3500);
+		Thread.sleep(3000);
 		MUse.click(scheduleMenuButton);
 		if(!longtitude.equals("") || !latitude.equals("")) {
 			dLongtitude = Double.parseDouble(longtitude);
 			dLatitude = Double.parseDouble(latitude);
 			Location location = new Location(dLongtitude,dLatitude, 1.0); 
 			getMDriver().setLocation(location);
-			Thread.sleep(10000); //wait for change location succesfully
+			Thread.sleep(20000); //wait for change location succesfully
 		}
 		
         for (int loop = 0; loop <= 3; loop++) {
@@ -113,7 +113,7 @@ public class CheckInOutPage extends BaseConfig{
                 MUse.click(cardButton);
                 
                 if(scenario.equals("movelocation")) {
-                	Thread.sleep(60000);
+                	Thread.sleep(50000);
                 }else if(scenario.equals("checkin")) {
                 	MUse.click(checkInPhotoButton);
                 	Thread.sleep(5000);
@@ -131,6 +131,8 @@ public class CheckInOutPage extends BaseConfig{
         	             price = details[2].trim();
         	             
         	             Thread.sleep(1000);
+        	             MUse.swipeUp(436, 1539, 436, 1000);
+        	             Thread.sleep(1000);
         	             productSelectButton = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("(//android.widget.Button[ancestor::android.widget.ScrollView/android.view.View[contains(@content-desc,'Product')]])["+(i+1)+"]"))));
         	             MUse.click(productSelectButton);  
         	             Thread.sleep(1000);
@@ -139,27 +141,23 @@ public class CheckInOutPage extends BaseConfig{
         	             Thread.sleep(1000);
         	             quantityProductInput = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("//android.widget.EditText["+((2*i)+1)+"]"))));
         	             MUse.sendKeys(quantityProductInput, quantity);
-        	             MUse.swipeUp(470, 1648, 470, 1046);
         	             Thread.sleep(1000);
         	             priceProductInput = getWait().until(ExpectedConditions.elementToBeClickable(getMDriver().findElement(By.xpath("//android.widget.EditText["+(2*(i+1))+"]"))));
         	             MUse.sendKeys(priceProductInput, price);
-        	             MUse.hideKeyboard();
+        	             Thread.sleep(2000);
+        	             
         	             if (products.length >1 & i+1 < products.length) {
-        	            	 addMoreProductButton.click();
-        	            	 Thread.sleep(2000);
-        	            	 MUse.swipeUp(470, 1648, 470, 1046);
+        	            	 MUse.click(addMoreProductButton);
         	             }
         	         }
+        	         
+        	         MUse.swipeUp(436, 1539, 436, 1000);
         	         MUse.click(checkOutPhotoButton);
+        	         Thread.sleep(5000);
         	         MUse.click(takeAPictureButton);
                  	 MUse.click(confirmTakeAPictureButton);
-                 	 //MUse.hideKeyboard();
-                 	 //MUse.swipeUp(430, 1286, 430, 768);
+                 	 
                  	 Thread.sleep(1000);
-                 	 //disable add attachment
-        			 /*MUse.sendKeys(selectFileButton, Utilize.getAbsolutePath(attachmentCheckout));
-        			 MUse.click(burgerMenuButton); MUse.click(downloadMenuButton);
-        			 MUse.click(selectFile);*/
                  	 MUse.click(checkOutButton);
                  	 MUse.click(submitButton);
                  	 Thread.sleep(15000);
