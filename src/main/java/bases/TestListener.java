@@ -1,8 +1,6 @@
 package bases;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -11,112 +9,107 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 import utilization.Utilize;
 
-public class TestListener extends BaseConfig implements ISuiteListener, ITestListener {
-    private static ExtentReports extent;
-    private static ExtentTest test;
-    private static String reportPath;
 
-    static {
-        // Bersihkan screenshot lama
-        File dir1 = new File(Utilize.getAbsolutePath("//actualResult//screenshot"));
-        if (dir1.exists()) {
-            for (File file : dir1.listFiles()) {
-                file.delete();
-            }
-            dir1.delete();
-        }
-    }
+public class TestListener extends BaseConfig implements ISuiteListener, ITestListener {
+	static {
+		File dir1 = new File(Utilize.getAbsolutePath("//actualResult//screenshot"));
+		
+		File[] listFiles1 = dir1.listFiles();
+		if(dir1.exists()){
+			for (File file : listFiles1) {
+				file.getName();
+				file.delete();
+			}
+			dir1.delete();
+		}
+	}
 
     @Override
     public void onStart(ITestContext context) {
-        if (extent == null) { // Pastikan hanya diinisialisasi sekali
-            reportPath = "test-output/AutomationTestResult.html";
-
-            ExtentSparkReporter reporter = new ExtentSparkReporter(reportPath);
-            extent = new ExtentReports();
-            extent.attachReporter(reporter);
-        }
-
-        System.out.println("============ " + context.getName() + " ============");
+    	test = extent.createTest(context.getName());
+    	System.out.println("============ "+context.getName()+" ============");
     }
 
     @Override
     public void onTestStart(ITestResult result) {
-        test = extent.createTest(result.getMethod().getMethodName());
-
-        // Menampilkan parameter dalam report
-        Object[] parameters = result.getParameters();
-        if (parameters.length > 0) {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < parameters.length; i++) {
-                sb.append(parameters[i].toString());
-                if (i < parameters.length - 1) {
-                    sb.append(", ");
-                }
+    	//info for extent report
+    	Object[] parameters = result.getParameters(); 
+    	StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < parameters.length; i++) {
+            sb.append(parameters[i].toString());
+            if (i < parameters.length - 1) {
+                sb.append(", ");
             }
-            test.info("Test Parameters: " + sb.toString());
         }
+        String combinedParameters = sb.toString();
+        test.info( result.getMethod().getMethodName()+" : " + combinedParameters);
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        test.pass(result.getMethod().getMethodName() + " : Test Passed");
-        System.out.println(result.getMethod().getMethodName() + "-Passed-");
+        test.pass( result.getMethod().getMethodName()+" : Test Passed");
+        System.out.println(result.getMethod().getMethodName()+"-Passed-");
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        String errorDetails = "";
-
-        /*if (result.getThrowable() != null) {
+    	String combinedErrorDetails = "";
+    	if (result.getThrowable() != null) {
             StackTraceElement[] stackTrace = result.getThrowable().getStackTrace();
+            String[] errorDetails = new String[4];
             for (StackTraceElement element : stackTrace) {
+                // Menampilkan file dan baris error
                 if (element.getClassName().contains("testCases")) {
-                    errorDetails = "Class: " + element.getClassName() +
-                            ", Method: " + element.getMethodName() +
-                            ", File: " + element.getFileName() +
-                            ", Line: " + element.getLineNumber();
-                    break;
+                	errorDetails[0] = "Class: " + element.getClassName();
+                	errorDetails[1] = "Method: " + element.getMethodName();
+                	errorDetails[2] = "File: " + element.getFileName();
+                	errorDetails[3] = "Line: " + element.getLineNumber();
+                    break;  
                 }
             }
-        }*/
-
-        try {
-            String base64Image;
-            if (context.getSuite().getName().contains("Mobile")) {
-                base64Image = ((TakesScreenshot) getMDriver()).getScreenshotAs(OutputType.BASE64);
-            } else {
-                base64Image = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BASE64);
-            }
-
-            test.fail(result.getMethod().getMethodName() + " : Test Failed\nError: " + result.getThrowable().getMessage() +
-                    "\n" + result.getThrowable(),
-                    MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());
-        } catch (Exception e) {
-            test.fail(result.getMethod().getMethodName() + " : (exception) Test Failed\nError: " + result.getThrowable().getMessage() +
-                    "\n" + result.getThrowable());
-            e.printStackTrace();
+            combinedErrorDetails = String.join(", ", errorDetails);
         }
+    	
+    	
+    	// Ambil pesan error utama dari Throwable
+        String errorMessage = result.getThrowable().getMessage();
 
-        System.out.println(result.getMethod().getMethodName() + "-Failed-");
+        // Potong pesan pada "For documentation on this error"
+        String[] splitMessage = errorMessage.split("For documentation on this error");
+        String cleanErrorMessage = splitMessage[0].trim();
+        
+        try {
+            String base64Image = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BASE64);
+            
+	        test.fail(result.getMethod().getMethodName() +" : Test Failed, \n Cause : " + cleanErrorMessage + ", " + combinedErrorDetails
+	        		,MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());
+        } catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        System.out.println(result.getMethod().getMethodName()+"-Failed-");
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        test.skip(result.getMethod().getMethodName() + " : Test Skipped");
+        test.skip(result.getMethod().getMethodName()+" : Test Skipped");
     }
 
     @Override
+    public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
+        // Dijalankan jika metode tes gagal tetapi berada dalam persentase keberhasilan yang ditentukan
+        System.out.println("Test Failed But Within Success Percentage: " + result.getMethod().getMethodName());
+    }
+
+
+    @Override
     public void onFinish(ITestContext context) {
-        if (extent != null) {
-            extent.flush();
-        }
+    	if (extent != null) {
+			extent.flush();
+		}
     }
 }
