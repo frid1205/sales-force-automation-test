@@ -85,7 +85,7 @@ public class CallSchedullerPage extends BaseConfig{
 		detailCallSchedullingButton = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@href,'sales/call-scheduling')]/i[ancestor::tr/td[contains(text(),'"+userName+"')]]")));
 		Use.Click(detailCallSchedullingButton);
 		
-		addTaskButton = getWait().until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//button[contains(@onclick,'"+date(day)+"')]"))));
+		addTaskButton = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@onclick,'"+date(day)+"')]")));
 		Use.Click(addTaskButton);
 		if(day.equals("0")) {
 			Use.SendKeys(startTimeInput, hours(startTime));
@@ -122,7 +122,7 @@ public class CallSchedullerPage extends BaseConfig{
 	public void addCallSchedullerFromLead(String assignTo, String startTime, String endTime, String customer, String outlet, String taskCategory, String description, String expectedResult) throws InterruptedException {
 		addCallSchedullerFromLeadButton = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Add task schedule'][ancestor::div/div/div/h2[contains(text(),'"+assignTo+"')]]")));
 		Use.Click(addCallSchedullerFromLeadButton);
-
+		System.out.println("Masuk 1");
 		Use.SendKeys(startTimeInput, hours(startTime));
 		Use.SendKeys(endTimeInput, hours(endTime));
 		if(!customer.equals("")) {
@@ -130,22 +130,26 @@ public class CallSchedullerPage extends BaseConfig{
 			Thread.sleep(2000);
 			customerSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+customer+"')]")));
 			Use.Click(customerSelectLi);
+			System.out.println("Masuk 2");
 		}
 		if(!outlet.equals("")) {
 			Use.Click(outletSelectButton);
 			Thread.sleep(2000);
 			outletSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+outlet+"')]")));
 			Use.Click(outletSelectLi);
+			System.out.println("Masuk 3");
 		}
 		if(!taskCategory.equals("")) {			
 			Use.Click(taskSelectButton);
 			Thread.sleep(2000);
 			taskSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+taskCategory+"')]")));
 			Use.Click(taskSelectLi);
+			System.out.println("Masuk 4");
 		}
 		Use.SendKeys(descriptionAddSchedullerLeadInput, description);
 		Use.Click(addButton2);
 		Thread.sleep(2000);
+		System.out.println("Masuk 5");
 		callSchedullerAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(callSchedullerAlert.getText(), expectedResult);
 	}
