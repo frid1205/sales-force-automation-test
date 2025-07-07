@@ -38,15 +38,6 @@
 	    	</class>
         </classes>
     </test>
-    <test name="Request Expenses">
-        <classes>
-            <class name="mobileTestCases.RequestExpenses">
-    			<methods>
-					<include name="testRequestExpenses"/>
-    			</methods>
-	    	</class>
-        </classes>
-    </test>
     <test name="Clock Out">
         <classes>
             <class name="mobileTestCases.ClockInOut">

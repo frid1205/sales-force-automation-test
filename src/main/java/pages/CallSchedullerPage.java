@@ -122,7 +122,6 @@ public class CallSchedullerPage extends BaseConfig{
 	public void addCallSchedullerFromLead(String assignTo, String startTime, String endTime, String customer, String outlet, String taskCategory, String description, String expectedResult) throws InterruptedException {
 		addCallSchedullerFromLeadButton = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Add task schedule'][ancestor::div/div/div/h2[contains(text(),'"+assignTo+"')]]")));
 		Use.Click(addCallSchedullerFromLeadButton);
-		System.out.println("Masuk 1");
 		Use.SendKeys(startTimeInput, hours(startTime));
 		Use.SendKeys(endTimeInput, hours(endTime));
 		if(!customer.equals("")) {
