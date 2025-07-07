@@ -6,6 +6,9 @@ USER root
 RUN apt-get update && apt-get install -y bash passwd
 RUN echo "root:x:0:0:root:/root:/bin/bash" >> /etc/passwd
 
+# Set timezone to UTC+7 (Asia/Jakarta)
+ENV TZ=Asia/Jakarta
+
 # Install Java + Maven
 RUN apt-get update && apt-get install -y \
     openjdk-21-jdk \
@@ -16,6 +19,9 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     nano \
     git \
+    tzdata \
+    && ln -fs /usr/share/zoneinfo/$TZ /etc/localtime \
+    && dpkg-reconfigure -f noninteractive tzdata \
     && rm -rf /var/lib/apt/lists/*
    
 # (Optional) Install Appium Python Client if needed
