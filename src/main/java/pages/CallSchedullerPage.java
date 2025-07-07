@@ -124,6 +124,7 @@ public class CallSchedullerPage extends BaseConfig{
 		Use.Click(addCallSchedullerFromLeadButton);
 		Use.SendKeys(startTimeInput, hours(startTime));
 		Use.SendKeys(endTimeInput, hours(endTime));
+		System.out.println("-->"+hours(startTime)+"-"+hours(endTime));
 		if(!customer.equals("")) {
 			Use.Click(customerSelectButton);
 			Thread.sleep(1000);
