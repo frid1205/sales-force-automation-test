@@ -125,37 +125,31 @@ public class CallSchedullerPage extends BaseConfig{
 		System.out.println("Masuk 1");
 		Use.SendKeys(startTimeInput, hours(startTime));
 		Use.SendKeys(endTimeInput, hours(endTime));
-		System.out.println("start time -> "+hours(startTime)+"end time ->"+hours(endTime));
-		Assert.assertEquals("+", "-");
-		/*if(!customer.equals("")) {
+		if(!customer.equals("")) {
 			Use.Click(customerSelectButton);
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			customerSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+customer+"')]")));
 			Use.Click(customerSelectLi);
-			System.out.println("Masuk 2");
 		}
 		if(!outlet.equals("")) {
 			Use.Click(outletSelectButton);
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			outletSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+outlet+"')]")));
 			Use.Click(outletSelectLi);
-			System.out.println("Masuk 3");
 		}
 		if(!taskCategory.equals("")) {			
 			Use.Click(taskSelectButton);
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			taskSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+taskCategory+"')]")));
 			Use.Click(taskSelectLi);
-			System.out.println("Masuk 4");
 		}
 		Use.SendKeys(descriptionAddSchedullerLeadInput, description);
 		Use.Click(addButton2);
-		Thread.sleep(2000);
-		System.out.println("Masuk 5");
+		Thread.sleep(1000);
 		sa.assertAll();
 		callSchedullerAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(callSchedullerAlert.getText(), expectedResult);
-		*/
+		
 	}
 	
 	public static String date(String i) {

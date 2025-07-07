@@ -117,14 +117,14 @@ public class LeadManagementPage extends BaseConfig{
 		Use.Click(addActionButton);
 		if(!assignTo.equals("")) {
 			Use.Click(assignToSelectButton);
-			Thread.sleep(1500);
-			assignToSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+assignTo+"')]")));
+			Thread.sleep(2000);
+			assignToSelectLi = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[contains(text(),'"+assignTo+"')]")));
 			Use.Click(assignToSelectLi);
 		}
 		if(!label.equals("")) {
 			Use.Click(labelSelectButton);
 			Thread.sleep(1500);
-			labelSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+label+"')]")));
+			labelSelectLi = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[contains(text(),'"+label+"')]")));
 			Use.Click(labelSelectLi);
 		}
 		dates = getStartAndEndOfCurrentMonth();
@@ -134,7 +134,7 @@ public class LeadManagementPage extends BaseConfig{
 		if(!status.equals("")) {
 			Use.Click(statusSelectButton);
 			Thread.sleep(1500);
-			statusSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+status+"')]")));
+			statusSelectLi = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[contains(text(),'"+status+"')]")));
 			Use.Click(statusSelectLi);
 		}
 		if(!customer.equals("")) {
