@@ -1,6 +1,8 @@
 package bases;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -71,9 +73,9 @@ public class TestListener extends BaseConfig implements ISuiteListener, ITestLis
 
     @Override
     public void onTestFailure(ITestResult result) {
-       // String errorDetails = "";
+        /*String errorDetails = "";
 
-        /*if (result.getThrowable() != null) {
+        if (result.getThrowable() != null) {
             StackTraceElement[] stackTrace = result.getThrowable().getStackTrace();
             for (StackTraceElement element : stackTrace) {
                 if (element.getClassName().contains("testCases")) {
@@ -95,11 +97,11 @@ public class TestListener extends BaseConfig implements ISuiteListener, ITestLis
             }
 
             test.fail(result.getMethod().getMethodName() + " : Test Failed\nError: " + result.getThrowable().getMessage() +
-                    "\n" + result.getThrowable(),
+                    "\n" + result.getThrowable().getStackTrace(),
                     MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());
         } catch (Exception e) {
-            test.fail(result.getMethod().getMethodName() + " : (exception) Test Failed\nError: " + result.getThrowable().getMessage() +
-                    "\n" + result.getThrowable());
+            test.fail(result.getMethod().getMethodName() + " : (Exception) Test Failed\nError: " + result.getThrowable().getMessage() +
+                    "\n" + result.getThrowable().getStackTrace());
             e.printStackTrace();
         }
 

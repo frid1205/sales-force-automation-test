@@ -188,6 +188,8 @@ public class BaseConfig {
 			options.setCapability("uiautomator2ServerLaunchTimeout", 600000);
 			options.setCapability("uiautomator2ServerInstallTimeout", 600000);
 			options.setCapability("adbExecTimeout", 600000); // 120 seconds
+			options.setCapability("unicodeKeyboard", true);
+			options.setCapability("resetKeyboard", true);
 
 			// Inisialisasi AndroidDriver dengan UiAutomator2Options
 			if(isCloud.equals("true")) {

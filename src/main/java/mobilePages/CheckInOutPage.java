@@ -92,7 +92,7 @@ public class CheckInOutPage extends BaseConfig{
 	String[] products, details;
 	
 	public void checkInOut(String scenario, String longtitude, String latitude, String status, String outlet, String customer, String dataProduct, String attachmentCheckout, String reason) throws InterruptedException {
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		MUse.click(scheduleMenuButton);
 		if(!longtitude.equals("") || !latitude.equals("")) {
 			dLongtitude = Double.parseDouble(longtitude);
