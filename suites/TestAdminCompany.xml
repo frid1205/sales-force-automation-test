@@ -11,7 +11,7 @@
 	    	</class>
         </classes>
     </test>
-    <!--<test name="Role Management Setting">
+    <test name="Role Management Setting">
         <classes>
             <class name="testCases.RoleManagement">
     			<methods>
@@ -100,13 +100,13 @@
     			</methods>
 	    	</class>
         </classes>
-    </test>-->
+    </test>
     <test name="Lead Management">
         <classes>
             <class name="testCases.LeadManagement">
     			<methods>
-					<!--<include name="testAddLeadManagement"/>
-					<include name="testEditAndCommentLeadManagement"/>-->
+					<include name="testAddLeadManagement"/>
+					<include name="testEditAndCommentLeadManagement"/>
 					<include name="testAddCallSchedullerFromLead"/>
     			</methods>
 	    	</class>
