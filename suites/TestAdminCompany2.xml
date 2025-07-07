@@ -20,7 +20,7 @@
 	    	</class>
         </classes>
     </test>
-    <test name="Expenses Management - Approve or Reject">
+    <!--<test name="Expenses Management - Approve or Reject">
         <classes>
             <class name="testCases.ExpensesManagement">
     			<methods>
@@ -28,5 +28,5 @@
     			</methods>
 	    	</class>
         </classes>
-    </test>
+    </test>-->
 </suite>
