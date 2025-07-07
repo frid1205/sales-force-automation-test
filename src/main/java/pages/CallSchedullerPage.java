@@ -125,7 +125,7 @@ public class CallSchedullerPage extends BaseConfig{
 		System.out.println("Masuk 1");
 		Use.SendKeys(startTimeInput, hours(startTime));
 		Use.SendKeys(endTimeInput, hours(endTime));
-		sa.assertEquals(true, false);
+		Assert.assertEquals("+", "-");
 		/*if(!customer.equals("")) {
 			Use.Click(customerSelectButton);
 			Thread.sleep(2000);
