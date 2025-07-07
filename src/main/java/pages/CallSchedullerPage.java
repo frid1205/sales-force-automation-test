@@ -125,6 +125,7 @@ public class CallSchedullerPage extends BaseConfig{
 		System.out.println("Masuk 1");
 		Use.SendKeys(startTimeInput, hours(startTime));
 		Use.SendKeys(endTimeInput, hours(endTime));
+		sa.assertEquals(true, false);
 		if(!customer.equals("")) {
 			Use.Click(customerSelectButton);
 			Thread.sleep(2000);
@@ -150,8 +151,10 @@ public class CallSchedullerPage extends BaseConfig{
 		Use.Click(addButton2);
 		Thread.sleep(2000);
 		System.out.println("Masuk 5");
+		sa.assertAll();
 		callSchedullerAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(callSchedullerAlert.getText(), expectedResult);
+		
 	}
 	
 	public static String date(String i) {
