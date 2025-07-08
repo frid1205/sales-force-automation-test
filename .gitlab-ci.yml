@@ -8,7 +8,7 @@ stages:
   - run-test
   - kill-emulator
 
-## DEPLOYMENT ##########################################################
+## DEPLOYMENT ( stp-appium.lumoshive.net & stp-automation.lumoshive.net ) ##########################################################
 deployment:
   stage: deployment
   image: docker:stable

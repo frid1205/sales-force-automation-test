@@ -1,21 +1,12 @@
 #!/bin/bash
 
-# Install execute-driver plugin
-# echo "Install execute-driver plugin"
-# npm install -g lerna@6 \
-#  && git clone https://github.com/appium/appium-plugins.git \
-# && cd appium-plugins/packages/execute-driver \
-# && npm install \
-# && npx appium plugin install --source=local .
-
-# Check appium plugin list
-# echo "check appium plugin list" 
-# appium plugin list
-
 # Start Appium in background with --allow-insecure=adb_shell
 echo "Starting Appium..."
-# appium --allow-insecure=adb_shell --use-plugins=execute-driver  --relaxed-security > /tmp/appium.log 2>&1 &
 appium --allow-insecure=adb_shell > /tmp/appium.log 2>&1 &
+
+# Start noVNC in background
+echo "Starting noVNC (novnc_proxy)..."
+/opt/noVNC/utils/novnc_proxy --vnc localhost:5900 --listen 6080 > /tmp/novnc.log 2>&1 &
 
 # Wait for Appium to be ready
 echo "Waiting for Appium to be up..."
@@ -27,6 +18,3 @@ for i in {1..120}; do
   sleep 2
 done
 
-# echo "Appium failed to start."
-# cat /tmp/appium.log
-# exit 1
