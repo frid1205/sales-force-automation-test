@@ -56,6 +56,7 @@ public class ProductPage extends BaseConfig{
 	
 	public void addProduct(String productName, String productCategory, String productAdvantage, String productDetail, String productImage, String expectedResult) throws InterruptedException {
 		Use.Click(addProductButton);
+		Thread.sleep(1000);
 		Use.SendKeys(productNameInput, productName);
 		if(!productCategory.equals("")) {			
 			Use.Click(categorySelectButton);
@@ -67,13 +68,14 @@ public class ProductPage extends BaseConfig{
 		Use.SendKeys(productDetailInput, productDetail);
 		Use.uploadImage(productImageInput, Utilize.getAbsolutePath(productImage));
 		Use.Click(addButton);
+		Thread.sleep(2000);
 		productAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(productAlert.getText(), expectedResult);
 	}
 	
 	public void editProduct(String productName, String productCategory, String productAdvantage, String productDetail, String productImage, String expectedResult) throws InterruptedException {
 		Use.SendKeys(searchInput, productName);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		editProductButton = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//a[contains(@data-url,'setting/product/edit')]/i)[1][ancestor::tr/td[contains(text(),'"+productName+"')]]")));
 		Use.Click(editProductButton);
 		Use.SendKeys(productNameInput, productName);

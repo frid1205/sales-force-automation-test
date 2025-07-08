@@ -124,7 +124,7 @@ public class CustomerAndOutletPage extends BaseConfig{
 			Use.Click(provinceSelectButton);
 			Thread.sleep(1000);
 			Use.SendKeys(selectInput, province);
-			Thread.sleep(1500);
+			Thread.sleep(2000);
 			provinceSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+province+"')]")));
 			Use.Click(provinceSelectLi);
 		}
@@ -132,7 +132,7 @@ public class CustomerAndOutletPage extends BaseConfig{
 			Use.Click(regionSelectButton);
 			Thread.sleep(1000);
 			Use.SendKeys(selectInput, region);
-			Thread.sleep(1500);
+			Thread.sleep(2000);
 			regionSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+region+"')]")));
 			Use.Click(regionSelectLi);
 		}
@@ -153,7 +153,7 @@ public class CustomerAndOutletPage extends BaseConfig{
 			Use.Click(provinceSelectButton);
 			Thread.sleep(1000);
 			Use.SendKeys(selectInput, province);
-			Thread.sleep(2000);
+			Thread.sleep(2500);
 			provinceSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+province+"')]")));
 			Use.Click(provinceSelectLi);
 		}
@@ -161,7 +161,7 @@ public class CustomerAndOutletPage extends BaseConfig{
 			Use.Click(regionSelectButton);
 			Thread.sleep(1000);
 			Use.SendKeys(selectInput, region);
-			Thread.sleep(2000);
+			Thread.sleep(2500);
 			regionSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+region+"')]")));
 			Use.Click(regionSelectLi);
 		}

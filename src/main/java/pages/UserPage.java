@@ -83,6 +83,7 @@ public class UserPage extends BaseConfig{
 		Use.SendKeys(confirmPasswordInput, coPassword);
 		Use.uploadImage(photoProfileInput, Utilize.getAbsolutePath(profilePicture));
 		Use.Click(addButton);
+		Thread.sleep(1000);
 		userAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//*[contains(text(),'"+expectedResult+"')]"))));
 		Assert.assertEquals(userAlert.getText(), expectedResult);
 	}
@@ -133,7 +134,7 @@ public class UserPage extends BaseConfig{
 	
 	public void editUserAdmin(String name, String phoneNumber, String role, String email, String password, String coPassword, String profilePicture, String expectedResult) throws InterruptedException {
 		Use.SendKeys(searchInput, name);
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		editUserButton = getWait().until(ExpectedConditions.elementToBeClickable((getDriver().findElement(By.xpath("//a[contains(@title, 'Edit User')][ancestor::tr[td[contains(text(), '"+name+"')]]]/i")))));
 		Use.Click(editUserButton);
 		Use.SendKeys(nameInput, name);

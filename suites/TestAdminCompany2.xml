@@ -29,4 +29,13 @@
 	    	</class>
         </classes>
     </test>-->
+    <test name="Send Email">
+        <classes>
+            <class name="bases.EmailSender">
+    			<methods>
+					<include name="testSendEmail"/>
+    			</methods>
+	    	</class>
+        </classes>
+    </test>
 </suite>

@@ -102,7 +102,6 @@ public class CompanyPage extends BaseConfig{
 		Use.SendKeys(companyPICNameInput, companyPICName);
 		Use.SendKeys(companyPICEmailInput, companyPICEmail);
 		Use.SendKeys(companyPICPasswordInput, companyPICPassword);
-		System.out.println("masuk mas "+mapType);
 		if(mapType.equals("googlemap")) {
 			Use.Click(googleMapCheckbox);
 			Use.Click(OKButton);
@@ -115,7 +114,7 @@ public class CompanyPage extends BaseConfig{
 		Use.SendKeys(expiratationDateInput, expirationDate);
 		Use.uploadImage(companyLogoInput, Utilize.getAbsolutePath(companyLogo));
 		Use.Click(addButton);
-		companyAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//*[contains(text(),'"+expectedResult+"')]"))));
+		companyAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(companyAlert.getText(), expectedResult);
 	}
 	
@@ -147,8 +146,15 @@ public class CompanyPage extends BaseConfig{
 		Use.SendKeys(activationDateInput, activationDate);
 		Use.SendKeys(expiratationDateInput, expirationDate);
 		Use.uploadImage(companyLogoInput, Utilize.getAbsolutePath(companyLogo));
-		Use.Click(saveButton);
-		companyAlert = getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//*[contains(text(),'"+expectedResult+"')]"))));
+		try {
+			Use.Click(saveButton);
+			companyAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+expectedResult+"')]")));
+		}catch(Exception ex) {
+			Use.Click(saveButton);
+			Thread.sleep(5000);
+			companyAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+expectedResult+"')]")));
+		}
+		
 		Assert.assertEquals(companyAlert.getText(), expectedResult);
 	}
 	

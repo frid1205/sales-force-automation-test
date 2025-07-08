@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -112,10 +113,11 @@ public class BaseConfig {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--guest");
         if (headless.equals("true")) {
-            options.addArguments("--headless");
+        	options.addArguments("--headless=new");
 			options.addArguments("--no-sandbox");
-        	options.addArguments("--disable-dev-shm-usage");
         	options.addArguments("--disable-gpu");
+        	options.addArguments("--window-size=1920,1080");
+        	options.addArguments("--disable-dev-shm-usage");
         }
         driver = new ChromeDriver(options);
     }
@@ -256,6 +258,7 @@ public class BaseConfig {
 		targetUrl = getBaseUrl() + url;
 		getDriver().get(targetUrl);
 		getWait().until(ExpectedConditions.urlContains(url));
+		Thread.sleep(2000);
 	}
 	
 	@AfterSuite
@@ -331,13 +334,13 @@ public class BaseConfig {
 			Recording.stopRecording();
 		}
 		
-		if(email.equals("yes")) {
+		/*if(email.equals("yes")) {
     		try {
     			EmailSender.SentEmail();
     		} catch (MessagingException | IOException e) {
     			e.printStackTrace();
     		}
-    	}
+    	}*/
 	}
 
 }

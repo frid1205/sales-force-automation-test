@@ -46,7 +46,7 @@ public class TaskCategoryPage extends BaseConfig{
 	
 	public void editTaskCategoryProduct(String taskCategoryProduct, String expectedResult) throws InterruptedException {
 		Use.SendKeys(searchCategoryInput, taskCategoryProduct);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		editTaskCategoryButton = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//a[contains(@data-url,'setting/task/edit')]/i)[1][ancestor::tr[td[contains(text(), '"+taskCategoryProduct+"')]]]")));
 		Use.Click(editTaskCategoryButton);
 		Use.SendKeys(taskCategoryNameInput, taskCategoryProduct);

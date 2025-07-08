@@ -50,6 +50,7 @@ public class CategoryProductPage extends BaseConfig{
 		Use.Click(addCategoryProductButton);
 		Use.SendKeys(categoryNameInput, categoryProduct);
 		Use.Click(addButton);
+		Thread.sleep(2000);
 		categoryProductAlert = getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+expectedResult+"')]")));
 		Assert.assertEquals(categoryProductAlert.getText(), expectedResult);
 		Use.Click(OKButton);

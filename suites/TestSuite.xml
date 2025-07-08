@@ -9,5 +9,6 @@
 		<suite-file path="../suites/TestSuperadmin.xml"/>
 		<suite-file path="../suites/TestAdminCompany.xml"/>
 		<suite-file path="../suites/TestSalesMobile.xml"/>
+		<suite-file path="../suites/TestAdminCompany2.xml"/>
 	</suite-files>
 </suite>

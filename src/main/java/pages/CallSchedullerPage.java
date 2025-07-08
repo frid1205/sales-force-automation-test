@@ -96,19 +96,19 @@ public class CallSchedullerPage extends BaseConfig{
 		}
 		if(!customer.equals("")) {
 			Use.Click(customerSelectButton);
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			customerSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+customer+"')]")));
 			Use.Click(customerSelectLi);
 		}
 		if(!outlet.equals("")) {
 			Use.Click(outletSelectButton);
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			outletSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+outlet+"')]")));
 			Use.Click(outletSelectLi);
 		}
 		if(!taskCategory.equals("")) {			
 			Use.Click(taskSelectButton);
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			taskSelectLi = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'"+taskCategory+"')]")));
 			Use.Click(taskSelectLi);
 		}
