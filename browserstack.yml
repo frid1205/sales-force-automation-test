@@ -6,12 +6,10 @@ platforms:
   - platformName: android
     platformVersion: "12.0"
     deviceName: Samsung Galaxy S22 Ultra
-  - platformName: android
-    platformVersion: "14.0"
-    deviceName: Google Pixel 8 Pro
-  - platformName: android
-    platformVersion: "13.0"
-    deviceName: OnePlus 11R
+  - platformName: ios
+    platformVersion: "16"
+    deviceName: iPhone 14
+    app: bs://bdac012e0376b55a8101f2465f76a145a8ee2889
 buildName: STP_MobileAutomationTest
 buildIdentifier: ${GITHUB_RUN_NUMBER}
 browserstackLocal: true

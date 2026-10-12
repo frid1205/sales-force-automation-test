@@ -23,11 +23,17 @@ public class AddCallScheduller extends BaseConfig{
 	public void setUpBeforeTest() {
 		AddCallSchedullerPage = new AddCallSchedullerPage();
 		try {
-			getMDriver().executeScript("mobile: shell", ImmutableMap.of(
-		            "command", "am start -n com.lumoshive.livre.hris/com.lumoshive.livre.hris.MainActivity"
-		    ));
+			if (!platform.equalsIgnoreCase("ios")) {
+				getMDriver().executeScript("mobile: shell", ImmutableMap.of(
+			            "command", "am start -n com.lumoshive.livre.hris/com.lumoshive.livre.hris.MainActivity"
+			    ));
+			}
 		} catch (Exception e) {
-			getMDriver().activateApp("com.lumoshive.livre.hris");
+			try {
+				if (getMDriver() instanceof io.appium.java_client.InteractsWithApps) {
+					((io.appium.java_client.InteractsWithApps) getMDriver()).activateApp("com.lumoshive.livre.hris");
+				}
+			} catch (Exception ignored) {}
 		}
 	}
 	

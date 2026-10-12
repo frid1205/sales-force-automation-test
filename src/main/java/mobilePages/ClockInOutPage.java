@@ -6,6 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import bases.BaseConfig;
 import io.appium.java_client.Location;
+import io.appium.java_client.remote.SupportsLocation;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import utilization.MUse;
 
@@ -38,7 +39,9 @@ public class ClockInOutPage extends BaseConfig{
 		Double dLongtitude = Double.parseDouble(longtitude);
 		Double dLatitude = Double.parseDouble(latitude);
 		Location location = new Location(dLongtitude,dLatitude, 1.0); 
-        getMDriver().setLocation(location);
+		if (getMDriver() instanceof SupportsLocation) {
+			((SupportsLocation) getMDriver()).setLocation(location);
+		}
         Thread.sleep(10000); //wait for change location succesfully
         MUse.click(homeButton);
         MUse.click(clockButton);

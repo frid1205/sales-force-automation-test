@@ -38,9 +38,12 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.google.common.collect.ImmutableMap;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.Location;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
+import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.ios.options.XCUITestOptions;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import utilization.DB;
 import utilization.Utilize;
@@ -48,7 +51,7 @@ import utilization.Utilize;
 @Listeners(bases.TestListener.class)
 public class BaseConfig {
 	private static WebDriver driver;
-	private static AndroidDriver mdriver;
+	private static AppiumDriver mdriver;
 	private static WebDriverWait wait;
 	private static Actions actions;
 	private static long DEFAULT_TIMEOUT = 30000;
@@ -64,6 +67,7 @@ public class BaseConfig {
     private static String targetUrl;
     protected static Location location;
     public static String isCloud = "false";
+    public static String platform = "android";
     static HashMap<String, Object> browserstackOptions = new HashMap<String, Object>();
     
     public BaseConfig() {
@@ -79,11 +83,18 @@ public class BaseConfig {
 	}
 	
 	@BeforeSuite
-	@Parameters({ "browser","headless","record","env","isCloud"})
-	public void startBrowser(String browser,  String headless, String record, String env, @Optional("false") String isCloudParam) throws Exception 
+	@Parameters({ "browser","headless","record","env","isCloud","platform"})
+	public void startBrowser(String browser,  String headless, String record, String env, @Optional("false") String isCloudParam, @Optional("android") String platformParam) throws Exception 
 	{
 		if (isCloudParam != null && !isCloudParam.isEmpty()) {
 			isCloud = isCloudParam;
+		}
+		if (platformParam != null && !platformParam.isEmpty()) {
+			platform = platformParam;
+		}
+		String sysPlatform = System.getProperty("platform");
+		if (sysPlatform != null && !sysPlatform.isEmpty()) {
+			platform = sysPlatform;
 		}
 		String sysIsCloud = System.getProperty("isCloud");
 		String envIsCloud = System.getenv("IS_CLOUD");
@@ -98,7 +109,11 @@ public class BaseConfig {
 			Recording.startRecording(context.getSuite().getName());
 		}
 		if(env.equals("mobile")) {
-			configureMobileDriver();
+			if (platform.equalsIgnoreCase("ios")) {
+				configureIosDriver();
+			} else {
+				configureMobileDriver();
+			}
 		}else {
 			BaseConfig.browser = browser;
 			switch (browser.toLowerCase()) {
@@ -251,6 +266,41 @@ public class BaseConfig {
 		 }
 	}
 	
+	private static HashMap<String, Object> getBrowserstackIosOptions(){
+	    HashMap<String, Object> browserstackOptions = new HashMap<>();
+	    browserstackOptions.put("userName","lumoshiveindones_TDMlAk");
+	    browserstackOptions.put("accessKey","sUX73p6v6jzT3jC1X8Lp");
+	    browserstackOptions.put("deviceName", "iPhone 14");
+	    browserstackOptions.put("osVersion", "16");
+	    browserstackOptions.put("projectName", "STP_MobileAutomationTest");
+	    String runNumber = System.getenv("GITHUB_RUN_NUMBER");
+	    browserstackOptions.put("buildName", (runNumber != null && !runNumber.isEmpty()) ? "Build #" + runNumber : "STP_MobileAutomationTest");
+	    browserstackOptions.put("sessionName", "STP iOS Mobile Session");
+	    return browserstackOptions;
+	}
+
+	private static void configureIosDriver() throws MalformedURLException, InterruptedException {
+		XCUITestOptions options = new XCUITestOptions();
+		if (isCloud.equals("true")) {
+			String bsApp = System.getProperty("bsAppIos", "bs://bdac012e0376b55a8101f2465f76a145a8ee2889");
+			options.setPlatformName("iOS")
+			       .setApp(bsApp)
+			       .setAutomationName("XCUITest");
+			options.setCapability("bstack:options", getBrowserstackIosOptions());
+			
+			String username = "lumoshiveindones_TDMlAk";
+			String accessKey = "sUX73p6v6jzT3jC1X8Lp";
+			String cloudUrl = "https://" + username + ":" + accessKey + "@hub-cloud.browserstack.com/wd/hub";
+			mdriver = new IOSDriver(new URL(cloudUrl), options);
+		} else {
+			options.setPlatformName("iOS")
+			       .setAutomationName("XCUITest")
+			       .setApp(Utilize.getAbsolutePath("\\testdata\\livrePeople.ipa"));
+			mdriver = new IOSDriver(new URL("http://127.0.0.1:4723"), options);
+		}
+		wait = new WebDriverWait(mdriver, Duration.ofMillis(DEFAULT_TIMEOUT));
+	}
+	
 	private static void setupExtentReport() {
 		extent = new ExtentReports();
 		spark = new ExtentSparkReporter("index.html");
@@ -292,7 +342,7 @@ public class BaseConfig {
 		return wait;
 	}
 	
-	public static AndroidDriver getMDriver() {
+	public static AppiumDriver getMDriver() {
 		return mdriver;
 	}
 	

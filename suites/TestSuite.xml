@@ -10,5 +10,6 @@
 		<!-- <suite-file path="../suites/TestSuperadmin.xml"/> -->
 		<!-- <suite-file path="../suites/TestAdminCompany.xml"/> -->
 		<suite-file path="../suites/TestSalesMobile.xml"/>
+		<suite-file path="../suites/TestSalesMobileIOS.xml"/>
 	</suite-files>
 </suite>

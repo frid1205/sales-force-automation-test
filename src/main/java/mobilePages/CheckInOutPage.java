@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import bases.BaseConfig;
 import io.appium.java_client.Location;
+import io.appium.java_client.remote.SupportsLocation;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import utilization.MUse;
 
@@ -98,7 +99,9 @@ public class CheckInOutPage extends BaseConfig{
 			dLongtitude = Double.parseDouble(longtitude);
 			dLatitude = Double.parseDouble(latitude);
 			Location location = new Location(dLongtitude,dLatitude, 1.0); 
-			getMDriver().setLocation(location);
+			if (getMDriver() instanceof SupportsLocation) {
+				((SupportsLocation) getMDriver()).setLocation(location);
+			}
 			Thread.sleep(20000); //wait for change location succesfully
 		}
 		

@@ -84,6 +84,8 @@ public class MUse extends BaseConfig {
 	}
 	
 	public static void hideKeyboard() {
-		getMDriver().hideKeyboard();
+		if (getMDriver() instanceof io.appium.java_client.HidesKeyboard) {
+			((io.appium.java_client.HidesKeyboard) getMDriver()).hideKeyboard();
+		}
 	}
 }

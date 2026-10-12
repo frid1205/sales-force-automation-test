@@ -6,6 +6,8 @@
 	<parameter name="record" value="no" />
 	<parameter name="email" value="no" />
 	<parameter name="env" value="mobile" />
+	<parameter name="platform" value="android" />
+	<parameter name="isCloud" value="true" />
 	
 
     <test name="Login Sales">
