@@ -4,7 +4,7 @@
 	<parameter name="browser" value="chrome" />
 	<parameter name="headless" value="false" />
 	<parameter name="record" value="no" />
-	<parameter name="email" value="no" />
+	<parameter name="email" value="yes" />
 	<parameter name="env" value="mobile" />
 	<parameter name="platform" value="android" />
 	<parameter name="isCloud" value="true" />

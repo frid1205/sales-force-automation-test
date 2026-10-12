@@ -4,7 +4,7 @@
 	<parameter name="browser" value="safari" />
 	<parameter name="headless" value="false" />
 	<parameter name="record" value="no" />
-	<parameter name="email" value="no" />
+	<parameter name="email" value="yes" />
 	<parameter name="env" value="mobile" />
 	<parameter name="platform" value="ios" />
 	<parameter name="isCloud" value="true" />

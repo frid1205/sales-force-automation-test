@@ -16,20 +16,21 @@ public class LoginMobilePage extends BaseConfig {
 	
 	// Locator Email untuk Android & iOS
 	@AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Email\"]/android.widget.EditText")
-	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTextField[@name='Email' or @value='Email' or @label='Email']")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTextField | //*[@name='Email' or @label='Email']//XCUIElementTypeTextField | //XCUIElementTypeTextField[@name='Email' or @value='Email' or @label='Email']")
 	private WebElement emailInput;
     
 	// Locator Password untuk Android & iOS
 	@AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Password\"]/android.widget.EditText")
-	@iOSXCUITFindBy(xpath = "//XCUIElementTypeSecureTextField[@name='Password' or @value='Password' or @label='Password']")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeSecureTextField | //*[@name='Password' or @label='Password']//XCUIElementTypeSecureTextField | //XCUIElementTypeSecureTextField[@name='Password' or @value='Password' or @label='Password']")
 	private WebElement passwordInput;
 	
 	// Locator Tombol Login untuk Android & iOS
 	@AndroidFindBy(xpath = "//android.widget.Button[@content-desc='Log in']")
-	@iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name='Log in' or @label='Log in']")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name='Log in' or @label='Log in'] | //*[@name='Log in' or @label='Log in' or contains(@name, 'Log in') or contains(@label, 'Log in')]")
 	private WebElement loginButton;
 	
 	public void testLogin(String email, String password, String expectedResult) throws InterruptedException {
+		Thread.sleep(3000);
 		MUse.sendKeys(emailInput, email);
 		MUse.sendKeys(passwordInput, password);
 		MUse.click(loginButton);

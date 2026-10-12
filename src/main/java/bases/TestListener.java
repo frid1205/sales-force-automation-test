@@ -89,16 +89,23 @@ public class TestListener extends BaseConfig implements ISuiteListener, ITestLis
         }*/
 
         try {
-            String base64Image;
-            if (context.getSuite().getName().contains("Mobile")) {
-                base64Image = ((TakesScreenshot) getMDriver()).getScreenshotAs(OutputType.BASE64);
-            } else {
+            String base64Image = null;
+            String suiteName = (result.getTestContext() != null && result.getTestContext().getSuite() != null)
+                    ? result.getTestContext().getSuite().getName() : "";
+            if (suiteName.contains("Mobile") || getMDriver() != null) {
+                if (getMDriver() != null) {
+                    base64Image = ((TakesScreenshot) getMDriver()).getScreenshotAs(OutputType.BASE64);
+                }
+            } else if (getDriver() != null) {
                 base64Image = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BASE64);
             }
 
-            test.fail(result.getMethod().getMethodName() + " : Test Failed\nError: " + result.getThrowable().getMessage() +
-                    "\n" + result.getThrowable().getStackTrace(),
-                    MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());
+            if (base64Image != null) {
+                test.fail(result.getMethod().getMethodName() + " : Test Failed\nError: " + result.getThrowable().getMessage(),
+                        MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());
+            } else {
+                test.fail(result.getMethod().getMethodName() + " : Test Failed\nError: " + result.getThrowable().getMessage());
+            }
         } catch (Exception e) {
             test.fail(result.getMethod().getMethodName() + " : (Exception) Test Failed\nError: " + result.getThrowable().getMessage() +
                     "\n" + result.getThrowable().getStackTrace());

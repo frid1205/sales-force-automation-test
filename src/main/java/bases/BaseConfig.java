@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import jakarta.mail.MessagingException;
+
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -276,16 +278,19 @@ public class BaseConfig {
 	    String runNumber = System.getenv("GITHUB_RUN_NUMBER");
 	    browserstackOptions.put("buildName", (runNumber != null && !runNumber.isEmpty()) ? "Build #" + runNumber : "STP_MobileAutomationTest");
 	    browserstackOptions.put("sessionName", "STP iOS Mobile Session");
+	    browserstackOptions.put("autoGrantPermissions", "true");
+	    browserstackOptions.put("interactiveDebugging", "true");
 	    return browserstackOptions;
 	}
 
 	private static void configureIosDriver() throws MalformedURLException, InterruptedException {
 		XCUITestOptions options = new XCUITestOptions();
+		options.setPlatformName("iOS")
+		       .setAutomationName("XCUITest")
+		       .setAutoAcceptAlerts(true);
 		if (isCloud.equals("true")) {
 			String bsApp = System.getProperty("bsAppIos", "bs://bdac012e0376b55a8101f2465f76a145a8ee2889");
-			options.setPlatformName("iOS")
-			       .setApp(bsApp)
-			       .setAutomationName("XCUITest");
+			options.setApp(bsApp);
 			options.setCapability("bstack:options", getBrowserstackIosOptions());
 			
 			String username = "lumoshiveindones_TDMlAk";
@@ -293,9 +298,7 @@ public class BaseConfig {
 			String cloudUrl = "https://" + username + ":" + accessKey + "@hub-cloud.browserstack.com/wd/hub";
 			mdriver = new IOSDriver(new URL(cloudUrl), options);
 		} else {
-			options.setPlatformName("iOS")
-			       .setAutomationName("XCUITest")
-			       .setApp(Utilize.getAbsolutePath("\\testdata\\livrePeople.ipa"));
+			options.setApp(Utilize.getAbsolutePath("\\testdata\\livrePeople.ipa"));
 			mdriver = new IOSDriver(new URL("http://127.0.0.1:4723"), options);
 		}
 		wait = new WebDriverWait(mdriver, Duration.ofMillis(DEFAULT_TIMEOUT));
@@ -396,18 +399,22 @@ public class BaseConfig {
 	
 	@AfterSuite
 	@Parameters({"record","email"})
-	public void stopRecording(String record, String email) throws Exception {
-		if(record.equals("yes")) {
+	public void stopRecording(@Optional("no") String record, @Optional("no") String email) throws Exception {
+		if(record != null && record.equalsIgnoreCase("yes")) {
 			Recording.stopRecording();
 		}
 		
-		/*if(email.equals("yes")) {
+		if(email != null && email.equalsIgnoreCase("yes")) {
     		try {
     			EmailSender.SentEmail();
     		} catch (MessagingException | IOException e) {
+    			System.err.println("Gagal mengirim email report: " + e.getMessage());
+    			e.printStackTrace();
+    		} catch (Exception e) {
+    			System.err.println("Error saat pengiriman email: " + e.getMessage());
     			e.printStackTrace();
     		}
-    	}*/
+    	}
 	}
 
 }
