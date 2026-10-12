@@ -278,8 +278,7 @@ public class BaseConfig {
 	    String runNumber = System.getenv("GITHUB_RUN_NUMBER");
 	    browserstackOptions.put("buildName", (runNumber != null && !runNumber.isEmpty()) ? "Build #" + runNumber : "STP_MobileAutomationTest");
 	    browserstackOptions.put("sessionName", "STP iOS Mobile Session");
-	    browserstackOptions.put("autoGrantPermissions", "true");
-	    browserstackOptions.put("interactiveDebugging", "true");
+	    browserstackOptions.put("appiumVersion", "2.4.1");
 	    return browserstackOptions;
 	}
 
