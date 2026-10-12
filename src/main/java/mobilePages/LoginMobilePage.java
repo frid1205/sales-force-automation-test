@@ -18,24 +18,21 @@ public class LoginMobilePage extends BaseConfig{
     }
 	
 	//list user of call scheduller
-	@FindBy (xpath="//android.widget.EditText[contains(@hint,'Enter Email Address')]")
+	@FindBy (xpath="//android.view.View[@content-desc=\"Email\"]/android.widget.EditText")
 	RemoteWebElement emailInput;
     
-	@FindBy(xpath="//android.widget.EditText[contains(@hint,'Enter Password')]")
+	@FindBy(xpath="//android.view.View[@content-desc=\"Password\"]/android.widget.EditText")
 	RemoteWebElement passwordInput;
 	
-	@FindBy(how = How.XPATH, using = "//android.widget.Button[@content-desc='Login']")
+	@FindBy(how = How.XPATH, using = "//android.widget.Button[@content-desc='Log in']")
 	WebElement loginButton;
 	
-	@FindBy(how = How.XPATH, using = "//android.view.View[@content-desc='Welcome back']")
-	List<WebElement> welcomeText;
 	
 	String longtitude;String latitude;
 	
 	public void testLogin(String email, String password, String expectedResult) throws InterruptedException {
 		MUse.sendKeys(emailInput, email);
 		MUse.sendKeys(passwordInput, password);
-		MUse.swipeUp(462, 1350, 462, 1024);
 		MUse.click(loginButton);
 		Thread.sleep(18000);
 	}

@@ -174,11 +174,10 @@ public class BaseConfig {
 		browserstackOptions = getBrowserstackOptions();
 		UiAutomator2Options options = new UiAutomator2Options();
 		if(isCloud.equals("true")) {
-			String bsApp = System.getProperty("bsApp", "bs://343c0e1c63ce56534ba94982c15717eb7c84c841");
+			String bsApp = System.getProperty("bsApp", "bs://ee701ecde00877b4d059289226e90ac3b9be5a1d");
 			options.setPlatformName("Android")
 		       .setApp(bsApp)
-		       .setAppPackage("com.lumoshive.salestrackpro")
-		       .setAppActivity("com.lumoshive.salestrackpro.MainActivity")
+		       .setAppPackage("com.lumoshive.livre.hris")
 		       .setAutomationName("UiAutomator2");
 			options.setCapability("bstack:options", getBrowserstackOptions());
 			
@@ -190,7 +189,7 @@ public class BaseConfig {
 				.setAppPackage("com.lumoshive.salestrackpro")
 				.setAppActivity("com.lumoshive.salestrackpro.MainActivity") 
 				.setIgnoreHiddenApiPolicyError(true)
-				.setApp(Utilize.getAbsolutePath("\\testdata\\STP.apk")) // Path ke file APK
+				.setApp(Utilize.getAbsolutePath("\\testdata\\livrePeople.apk")) // Path ke file APK
 				.setAutomationName("UiAutomator2")
 				.setAutoGrantPermissions(true)
 				.setNoReset(false) 

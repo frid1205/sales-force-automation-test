@@ -17,49 +17,5 @@
 	    	</class>
         </classes>
     </test>
-    <test name="Clock In">
-        <classes>
-            <class name="mobileTestCases.ClockInOut">
-    			<methods>
-					<include name="testClockIn"/>
-    			</methods>
-	    	</class>
-        </classes>
-    </test>
-    <test name="Add Call Scheduller">
-        <classes>
-            <class name="mobileTestCases.AddCallScheduller">
-    			<methods>
-					<include name="testAddCallScheduller"/>
-    			</methods>
-	    	</class>
-        </classes>
-    </test>
-    <test name="Check In Out">
-        <classes>
-            <class name="mobileTestCases.CheckInOut">
-    			<methods>
-					<include name="testCheckInOut"/>
-    			</methods>
-	    	</class>
-        </classes>
-    </test>
-    <test name="Request Expenses">
-        <classes>
-            <class name="mobileTestCases.RequestExpenses">
-    			<methods>
-					<include name="testRequestExpenses"/>
-    			</methods>
-	    	</class>
-        </classes>
-    </test>
-    <test name="Clock Out">
-        <classes>
-            <class name="mobileTestCases.ClockInOut">
-    			<methods>
-					<include name="testClockOut"/>
-    			</methods>
-	    	</class>
-        </classes>
-    </test>
+   
 </suite>
