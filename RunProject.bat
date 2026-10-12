@@ -1,7 +1,7 @@
 @echo off
 echo Membuka Emulator...
 cd C:\AndroidSDK\emulator
-start emulator -avd testEmulator
+start emulator -avd test_avd
 echo Menunggu emulator siap...
 adb wait-for-device
 
@@ -27,7 +27,7 @@ if %errorlevel% neq 0 (
 )
 
 echo Menutup Emulator...
-"C:\AndroidSDK\platform-tools\Sdk\platform-tools\adb.exe" -s emulator-5554 emu kill
+adb -s emulator-5554 emu kill
 timeout /t 5
 
 echo Mematikan semua emulator...

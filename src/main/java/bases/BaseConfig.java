@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -31,6 +30,7 @@ import org.testng.Reporter;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
 import com.aventstack.extentreports.ExtentReports;
@@ -42,7 +42,6 @@ import io.appium.java_client.Location;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import jakarta.mail.MessagingException;
 import utilization.DB;
 import utilization.Utilize;
 
@@ -80,9 +79,19 @@ public class BaseConfig {
 	}
 	
 	@BeforeSuite
-	@Parameters({ "browser","headless","record","env"})
-	public void startBrowser(String browser,  String headless, String record, String env) throws Exception 
+	@Parameters({ "browser","headless","record","env","isCloud"})
+	public void startBrowser(String browser,  String headless, String record, String env, @Optional("false") String isCloudParam) throws Exception 
 	{
+		if (isCloudParam != null && !isCloudParam.isEmpty()) {
+			isCloud = isCloudParam;
+		}
+		String sysIsCloud = System.getProperty("isCloud");
+		String envIsCloud = System.getenv("IS_CLOUD");
+		if (sysIsCloud != null && !sysIsCloud.isEmpty()) {
+			isCloud = sysIsCloud;
+		} else if (envIsCloud != null && !envIsCloud.isEmpty()) {
+			isCloud = envIsCloud;
+		}
 		
 		if(record.equals("yes")){
 			context = Reporter.getCurrentTestResult().getTestContext();
@@ -151,11 +160,12 @@ public class BaseConfig {
 	    HashMap<String, Object> browserstackOptions = new HashMap<>();
 	    browserstackOptions.put("userName","lumoshiveindones_TDMlAk");
 	    browserstackOptions.put("accessKey","sUX73p6v6jzT3jC1X8Lp");
-	    browserstackOptions.put("deviceName", "Google Pixel 6");
+	    browserstackOptions.put("deviceName", "Samsung Galaxy S22 Ultra");
 	    browserstackOptions.put("osVersion", "12.0");
-	    browserstackOptions.put("projectName", "STP Project");
-	    browserstackOptions.put("buildName", "Build 1.0");
-	    browserstackOptions.put("sessionName", "STP Session");
+	    browserstackOptions.put("projectName", "STP_MobileAutomationTest");
+	    String runNumber = System.getenv("GITHUB_RUN_NUMBER");
+	    browserstackOptions.put("buildName", (runNumber != null && !runNumber.isEmpty()) ? "Build #" + runNumber : "STP_MobileAutomationTest");
+	    browserstackOptions.put("sessionName", "STP Mobile Session");
 	    browserstackOptions.put("appiumVersion", "2.4.1");
 	    return browserstackOptions;
 	}
@@ -164,8 +174,9 @@ public class BaseConfig {
 		browserstackOptions = getBrowserstackOptions();
 		UiAutomator2Options options = new UiAutomator2Options();
 		if(isCloud.equals("true")) {
+			String bsApp = System.getProperty("bsApp", "bs://343c0e1c63ce56534ba94982c15717eb7c84c841");
 			options.setPlatformName("Android")
-		       .setApp("bs://1ac4a8d59b8f434d8a7a6640f7ed90b79c7de607")
+		       .setApp(bsApp)
 		       .setAppPackage("com.lumoshive.salestrackpro")
 		       .setAppActivity("com.lumoshive.salestrackpro.MainActivity")
 		       .setAutomationName("UiAutomator2");
@@ -175,11 +186,13 @@ public class BaseConfig {
 			options.setPlatformName("Android") 
 				.setDeviceName("emulator-5554") 
 				.setUdid("emulator-5554") 
-				//.setAppPackage("com.lumoshive.salestrackpro")
-				//.setAppActivity("com.lumoshive.salestrackpro.MainActivity") 
+				.setPlatformVersion("14")
+				.setAppPackage("com.lumoshive.salestrackpro")
+				.setAppActivity("com.lumoshive.salestrackpro.MainActivity") 
 				.setIgnoreHiddenApiPolicyError(true)
 				.setApp(Utilize.getAbsolutePath("\\testdata\\STP.apk")) // Path ke file APK
 				.setAutomationName("UiAutomator2")
+				.setAutoGrantPermissions(true)
 				.setNoReset(false) 
 				.setFullReset(false); 
 		}
@@ -202,7 +215,7 @@ public class BaseConfig {
 			} else {
 				mdriver = new AndroidDriver(new URL("http://127.0.0.1:4723"), options);
 			}
-			wait = new WebDriverWait(driver, Duration.ofMillis(DEFAULT_TIMEOUT));
+			wait = new WebDriverWait(mdriver, Duration.ofMillis(DEFAULT_TIMEOUT));
 			
 			if(isCloud.equals("true")) {
 				options.setCapability("autoGrantPermissions", true);
@@ -217,16 +230,20 @@ public class BaseConfig {
 				
 			}else {
 				String packageName = "com.lumoshive.salestrackpro";
-				//clear cache and storage
-				mdriver.executeScript("mobile: shell", Map.of("command", "pm clear " + packageName));
-				// Berikan izin lokasi secara otomatis
-				mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.ACCESS_FINE_LOCATION"));
-				mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.ACCESS_COARSE_LOCATION"));
-				mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.ACCESS_BACKGROUND_LOCATION"));
-				// Grant camera permission
-				mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.CAMERA"));
-				// Grant notification permission
-				mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.POST_NOTIFICATIONS"));
+				try {
+					//clear cache and storage
+					mdriver.executeScript("mobile: shell", Map.of("command", "pm clear " + packageName));
+					// Berikan izin lokasi secara otomatis
+					mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.ACCESS_FINE_LOCATION"));
+					mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.ACCESS_COARSE_LOCATION"));
+					mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.ACCESS_BACKGROUND_LOCATION"));
+					// Grant camera permission
+					mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.CAMERA"));
+					// Grant notification permission
+					mdriver.executeScript("mobile: shell", ImmutableMap.of("command", "pm grant " + packageName + " android.permission.POST_NOTIFICATIONS"));
+				} catch (Exception e) {
+					System.out.println("Notice on granting permissions via shell: " + e.getMessage());
+				}
 			}
 	
 		 } catch (MalformedURLException e) {
