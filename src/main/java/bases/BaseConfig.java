@@ -44,7 +44,7 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import utilization.DB;
 import utilization.Utilize;
-
+//test ci/cd
 @Listeners(bases.TestListener.class)
 public class BaseConfig {
 	private static WebDriver driver;
