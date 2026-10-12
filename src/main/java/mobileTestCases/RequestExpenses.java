@@ -20,9 +20,13 @@ public class RequestExpenses extends BaseConfig{
 	@BeforeTest
 	public void setUpBeforeTest() {
 		RequestExpensesPage = new RequestExpensesPage();
-		getMDriver().executeScript("mobile: shell", ImmutableMap.of(
-	            "command", "am start -n com.lumoshive.salestrackpro/com.lumoshive.salestrackpro.MainActivity"
-	    ));
+		try {
+			getMDriver().executeScript("mobile: shell", ImmutableMap.of(
+		            "command", "am start -n com.lumoshive.livre.hris/com.lumoshive.livre.hris.MainActivity"
+		    ));
+		} catch (Exception e) {
+			getMDriver().activateApp("com.lumoshive.livre.hris");
+		}
 	}
 	
 	@DataProvider(name = "reqExpenses")

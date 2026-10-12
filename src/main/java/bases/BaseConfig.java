@@ -178,6 +178,7 @@ public class BaseConfig {
 			options.setPlatformName("Android")
 		       .setApp(bsApp)
 		       .setAppPackage("com.lumoshive.livre.hris")
+		       .setAppActivity("com.lumoshive.livre.hris.MainActivity")
 		       .setAutomationName("UiAutomator2");
 			options.setCapability("bstack:options", getBrowserstackOptions());
 			
@@ -186,8 +187,8 @@ public class BaseConfig {
 				.setDeviceName("emulator-5554") 
 				.setUdid("emulator-5554") 
 				.setPlatformVersion("14")
-				.setAppPackage("com.lumoshive.salestrackpro")
-				.setAppActivity("com.lumoshive.salestrackpro.MainActivity") 
+				.setAppPackage("com.lumoshive.livre.hris")
+				.setAppActivity("com.lumoshive.livre.hris.MainActivity") 
 				.setIgnoreHiddenApiPolicyError(true)
 				.setApp(Utilize.getAbsolutePath("\\testdata\\livrePeople.apk")) // Path ke file APK
 				.setAutomationName("UiAutomator2")
@@ -228,7 +229,7 @@ public class BaseConfig {
 				));
 				
 			}else {
-				String packageName = "com.lumoshive.salestrackpro";
+				String packageName = "com.lumoshive.livre.hris";
 				try {
 					//clear cache and storage
 					mdriver.executeScript("mobile: shell", Map.of("command", "pm clear " + packageName));

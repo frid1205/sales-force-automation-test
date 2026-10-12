@@ -7,7 +7,7 @@ adb wait-for-device
 
 echo Menjalankan Appium di window baru...
 cd C:\Users\Fendy Ridwan\AppData\Roaming\npm
-start cmd /k "appium --use-plugins=execute-driver --relaxed-security"
+start cmd /k "appium --allow-insecure=adb_shell"
 
 :: Tunggu beberapa detik agar Appium siap
 timeout /t 10
